@@ -1,4 +1,4 @@
-instructor_id,name,password
-1,Eddard Stark,W1nterIsC0ming
-2,Tywin Lannister,Castermere
-3,Robert Baratheon,4DoorsMoreWhores
+instructor_id,username,name,password
+1,estark,Eddard Stark,W1nterIsC0ming
+2,tlannister,Tywin Lannister,Castermere
+3,rbaratheon,Robert Baratheon,4DoorsMoreWhores

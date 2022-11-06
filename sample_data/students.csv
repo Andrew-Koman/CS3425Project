@@ -1,7 +1,7 @@
-student_id,name,password
-1,Jon Snow ,TheWall
-2,Samwell Tarley,ILikeBooks
-3,Arya Stark,P01ntyEnd
-4,Sansa Stark,Summer:)
-5,Robb Stark,password
-6,Cersi Lannister,Wine
+student_id,username,name,password
+1,jsnow,Jon Snow ,TheWall
+2,starley,Samwell Tarley,ILikeBooks
+3,astark,Arya Stark,P01ntyEnd
+4,sstark,Sansa Stark,Summer:)
+5,rstark,Robb Stark,password
+6,clannister,Cersi Lannister,Wine
