@@ -1,0 +1,26 @@
+exams(course_id, exam_id, name, create_time, open_time, close_time)
+questions(exam_id, question_id, description, num_points)
+choices(question_id, choice_id, answer, is_correct)
+
+student_answers(student_id, exam_id, question_id, choice_id)
+
+course(course_id, title, credit)
+
+roles:
+	student
+	instructor
+	admin
+
+student(account_id, name, password) 
+	- Preview course info
+	- Register for courses
+	- Take online exams
+instructor(account_id, name, password)
+	- Teach multiple courses
+	- Create exams
+admin
+	- Create student account with temp password
+	- Create instructor account with temp password
+	- Cannot create database accounts
+	- Create courses
+	- Assign instructor to course
