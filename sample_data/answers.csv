@@ -1,0 +1,20 @@
+answer_id,answer_letter,question_id,answer,is_correct
+1,A,1,House Baratheon,FALSE
+2,B,1,House Lannister,TRUE
+3,C,1,House Stark,FALSE
+4,A,2,House Arryn,FALSE
+5,B,2,House Tyrell,FALSE
+6,C,2,House Martell,TRUE
+7,A,3,True,TRUE
+8,B,3,False,FALSE
+9,A,4,The North,TRUE
+10,B,4,Dorne,FALSE
+11,C,4,The Reach,FALSE
+12,A,5,The North,FALSE
+13,B,5,Dorne,FALSE
+14,C,5,The Reach,TRUE
+15,A,6,The Riverlands,FALSE
+16,B,6,The Vale,FALSE
+17,C,6,The Stormlands,TRUE
+18,A,7,True,FALSE
+19,B,7,False,TRUE
