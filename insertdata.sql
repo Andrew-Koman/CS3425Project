@@ -1,11 +1,11 @@
 # Clear All Tables
-DELETE FROM Answers WHERE TRUE;
-DELETE FROM Courses WHERE TRUE;
-DELETE FROM Exams WHERE TRUE;
-DELETE FROM Instructors WHERE TRUE;
-DELETE FROM Questions WHERE TRUE;
+DELETE FROM answers WHERE TRUE;
+DELETE FROM courses WHERE TRUE;
+DELETE FROM exams WHERE TRUE;
+DELETE FROM instructors WHERE TRUE;
+DELETE FROM questions WHERE TRUE;
 DELETE FROM student_answers WHERE TRUE;
-DELETE FROM Students WHERE TRUE;
+DELETE FROM students WHERE TRUE;
 DELETE FROM takes_course WHERE TRUE;
 DELETE FROM takes_exam WHERE TRUE;
 
@@ -31,3 +31,9 @@ CALL assign_teacher( 1, 1 );
 CALL assign_teacher(2, 3);
 
 # Insert the rest of the data
+LOAD DATA LOCAL INFILE "./sample_data/exams.csv" INTO TABLE exams;
+LOAD DATA LOCAL INFILE "./sample_data/questions.csv" INTO TABLE questions;
+LOAD DATA LOCAL INFILE "./sample_data/answers.csv" INTO TABLE answers;
+LOAD DATA LOCAL INFILE "./sample_data/student_answers.csv" INTO TABLE student_answers;
+LOAD DATA LOCAL INFILE "./sample_data/takes_course.csv" INTO TABLE takes_course;
+LOAD DATA LOCAL INFILE "./sample_data/takes_exam.csv" INTO TABLE takes_exam;

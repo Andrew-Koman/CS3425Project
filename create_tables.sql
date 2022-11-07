@@ -21,8 +21,8 @@ CREATE TABLE courses(
     title varchar(50) NOT NULL,
     credits numeric(2,1) NOT NULL,
 
-    FOREIGN KEY(instructor_id) REFERENCES instructors(instructor_id)
-                    ON DELETE SET NULL
+     FOREIGN KEY(instructor_id) REFERENCES instructors(instructor_id)
+                     ON DELETE SET NULL
 );
 
 CREATE TABLE exams(
@@ -78,7 +78,7 @@ CREATE TABLE takes_exam(
     exam_grade numeric(3,2),
 
     FOREIGN KEY(student_id) REFERENCES students(student_id),
-    FOREIGN KEY(exam_id) REFERENCES exams(exam_id)
+    FOREIGN KEY(exam_id) REFERENCES exams(exam_id)-- 
 );
 
 CREATE TABLE takes_course(
