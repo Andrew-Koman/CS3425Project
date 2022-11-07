@@ -31,9 +31,9 @@ CALL assign_teacher( 1, 1 );
 CALL assign_teacher(2, 3);
 
 # Insert the rest of the data
-LOAD DATA LOCAL INFILE "./sample_data/exams.csv" INTO TABLE exams;
-LOAD DATA LOCAL INFILE "./sample_data/questions.csv" INTO TABLE questions;
-LOAD DATA LOCAL INFILE "./sample_data/answers.csv" INTO TABLE answers;
-LOAD DATA LOCAL INFILE "./sample_data/student_answers.csv" INTO TABLE student_answers;
-LOAD DATA LOCAL INFILE "./sample_data/takes_course.csv" INTO TABLE takes_course;
-LOAD DATA LOCAL INFILE "./sample_data/takes_exam.csv" INTO TABLE takes_exam;
+LOAD DATA LOCAL INFILE './sample_data/exams.csv' INTO TABLE exams;
+LOAD DATA LOCAL INFILE './sample_data/questions.csv' INTO TABLE questions;
+LOAD DATA LOCAL INFILE './sample_data/answers.csv' INTO TABLE answers;
+LOAD DATA LOCAL INFILE './sample_data/student_answers.csv' INTO TABLE student_answers;
+LOAD DATA LOCAL INFILE './sample_data/takes_course.csv' INTO TABLE takes_course;
+LOAD DATA LOCAL INFILE './sample_data/takes_exam.csv' INTO TABLE takes_exam;
