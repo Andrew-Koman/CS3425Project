@@ -21,7 +21,7 @@ CREATE TABLE courses(
     title varchar(50) NOT NULL,
     credits numeric(2,1) NOT NULL,
 
-    FOREIGN KEY(instructor_id) REFERENCES Instructors(instructor_id)
+    FOREIGN KEY(instructor_id) REFERENCES instructors(instructor_id)
                     ON DELETE SET NULL
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE exams(
     open_time DATETIME,
     close_time DATETIME,
 
-    FOREIGN KEY(course_id) REFERENCES Courses(course_id)
+    FOREIGN KEY(course_id) REFERENCES courses(course_id)
 );
 
 CREATE TABLE questions(
@@ -42,7 +42,7 @@ CREATE TABLE questions(
     description TEXT NOT NULL,
     points int NOT NULL,
 
-    FOREIGN KEY(exam_id) REFERENCES Exams(exam_id)
+    FOREIGN KEY(exam_id) REFERENCES exams(exam_id)
 );
 
 CREATE TABLE answers(
@@ -52,7 +52,7 @@ CREATE TABLE answers(
     answer TINYTEXT NOT NULL,
     is_correct boolean NOT NULL,
 
-    FOREIGN KEY(question_id) REFERENCES Questions(question_id)
+    FOREIGN KEY(question_id) REFERENCES questions(question_id)
 );
 
 CREATE TABLE students(
@@ -66,8 +66,8 @@ CREATE TABLE student_answers(
     student_id int NOT NULL,
     answer_id int NOT NULL,
 
-    FOREIGN KEY(student_id) REFERENCES Students(student_id),
-    FOREIGN KEY(answer_id) REFERENCES Answers(answer_id)
+    FOREIGN KEY(student_id) REFERENCES students(student_id),
+    FOREIGN KEY(answer_id) REFERENCES answers(answer_id)
 );
 
 CREATE TABLE takes_exam(
@@ -77,16 +77,16 @@ CREATE TABLE takes_exam(
     end_time DATETIME,
     exam_grade numeric(3,2),
 
-    FOREIGN KEY(student_id) REFERENCES Students(student_id),
-    FOREIGN KEY(exam_id) REFERENCES Exams(exam_id)
+    FOREIGN KEY(student_id) REFERENCES students(student_id),
+    FOREIGN KEY(exam_id) REFERENCES exams(exam_id)
 );
 
 CREATE TABLE takes_course(
     student_id int NOT NULL,
     course_id int NOT NULL,
 
-    FOREIGN KEY(student_id) REFERENCES Students(student_id),
-    FOREIGN KEY(course_id) REFERENCES Courses(course_id)
+    FOREIGN KEY(student_id) REFERENCES students(student_id),
+    FOREIGN KEY(course_id) REFERENCES courses(course_id)
 );
 
 
