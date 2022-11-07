@@ -8,14 +8,14 @@ DROP TABLE IF EXISTS student_answers;
 DROP TABLE IF EXISTS takes_exam;
 DROP TABLE IF EXISTS takes_course;
 
-CREATE TABLE Instructors(
+CREATE TABLE instructors(
     instructor_id int PRIMARY KEY AUTO_INCREMENT,
     username varchar(20) NOT NULL,
     name varchar(50) NOT NULL,
     password char(64) NOT NULL
 );
 
-CREATE TABLE Courses(
+CREATE TABLE courses(
     course_id int PRIMARY KEY AUTO_INCREMENT,
     instructor_id int,
     title varchar(50) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE Courses(
                     ON DELETE SET NULL
 );
 
-CREATE TABLE Exams(
+CREATE TABLE exams(
     exam_id int PRIMARY KEY AUTO_INCREMENT,
     course_id int NOT NULL,
     name varchar(50) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE Exams(
     FOREIGN KEY(course_id) REFERENCES Courses(course_id)
 );
 
-CREATE TABLE Questions(
+CREATE TABLE questions(
     question_id int PRIMARY KEY AUTO_INCREMENT,
     exam_id int NOT NULL,
     description TEXT NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE Questions(
     FOREIGN KEY(exam_id) REFERENCES Exams(exam_id)
 );
 
-CREATE TABLE Answers(
+CREATE TABLE answers(
     answer_id int PRIMARY KEY AUTO_INCREMENT,
     question_id int NOT NULL,
     answer_letter char(1) NOT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE Answers(
     FOREIGN KEY(question_id) REFERENCES Questions(question_id)
 );
 
-CREATE TABLE Students(
+CREATE TABLE students(
     student_id int PRIMARY KEY AUTO_INCREMENT,
     username varchar(20) NOT NULL,
     name varchar(50) NOT NULL,
