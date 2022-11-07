@@ -1,12 +1,12 @@
-DROP TABLE IF EXISTS instructors;
-DROP TABLE IF EXISTS courses;
-DROP TABLE IF EXISTS exams;
-DROP TABLE IF EXISTS questions;
-DROP TABLE IF EXISTS answers;
-DROP TABLE IF EXISTS students;
-DROP TABLE IF EXISTS student_answers;
-DROP TABLE IF EXISTS takes_exam;
 DROP TABLE IF EXISTS takes_course;
+DROP TABLE IF EXISTS takes_exam;
+DROP TABLE IF EXISTS student_answers;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS answers;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS exams;
+DROP TABLE IF EXISTS courses;
+DROP TABLE IF EXISTS instructors;
 
 CREATE TABLE instructors(
     instructor_id int PRIMARY KEY AUTO_INCREMENT,
