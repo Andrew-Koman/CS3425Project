@@ -9,20 +9,20 @@ DELIMITER //
 -- Create Instructors account with temp password
 CREATE PROCEDURE create_instructor(IN ins_username VARCHAR(20), IN ins_name VARCHAR(50))
 BEGIN
-    INSERT INTO instructors VALUES(NULL, ins_username, ins_name, SHA2('CS3425', 256));
+    INSERT INTO instructors(username, name, password) VALUES(ins_username, ins_name, SHA2('CS3425', 256));
 END//
 
 -- Create Instructors account with temp password
 CREATE PROCEDURE create_student(IN stu_username VARCHAR(20), IN stu_name VARCHAR(50))
 BEGIN
-    INSERT INTO students VALUES(NULL, stu_username, stu_name, SHA2('CS3425', 256));
+    INSERT INTO students(username, name, password) VALUES(stu_username, stu_name, SHA2('CS3425', 256));
 END//
 
 -- Create course
 CREATE PROCEDURE create_course(IN cTitle VARCHAR(50), IN cCredits numeric(2,1))
 BEGIN
     -- instructor_id is by default NULL
-    INSERT INTO courses VALUES(NULL, NULL, cTitle, cCredits);
+    INSERT INTO courses(title, credits) VALUES(cTitle, cCredits);
 END//
 
 -- Assign instructor to create course

@@ -7,6 +7,9 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://classdb.it.mtu.edu:3307/cr4zy_smrt</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
+      <driver-properties>
+        <property name="allowLoadLocalInfile" value="TRUE" />
+      </driver-properties>
     </data-source>
   </component>
 </project>
