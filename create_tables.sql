@@ -1,3 +1,13 @@
+DROP TABLE IF EXISTS Instructors;
+DROP TABLE IF EXISTS Courses;
+DROP TABLE IF EXISTS Exams;
+DROP TABLE IF EXISTS Questions;
+DROP TABLE IF EXISTS Answers;
+DROP TABLE IF EXISTS Students;
+DROP TABLE IF EXISTS student_answers;
+DROP TABLE IF EXISTS takes_exam;
+DROP TABLE IF EXISTS takes_course;
+
 CREATE TABLE Instructors(
     instructor_id int PRIMARY KEY AUTO_INCREMENT,
     username varchar(20) NOT NULL,
