@@ -10,14 +10,12 @@ SET @master_password = 'CS3425';
 CREATE PROCEDURE create_instructor(IN ins_username VARCHAR(20), IN ins_name VARCHAR(50))
 BEGIN
     INSERT INTO Instructors VALUES(NULL, ins_username, ins_name, SHA2(@master_password, 256));
-    RETURN @master_password;
 END//
 
 -- Create Instructors account with temp password
 CREATE PROCEDURE create_student(IN stu_username VARCHAR(20), IN stu_name VARCHAR(50))
 BEGIN
     INSERT INTO Students VALUES(NULL, stu_username, stu_name, SHA2(@master_password, 256));
-    RETURN @master_password;
 END//
 
 -- Create course
