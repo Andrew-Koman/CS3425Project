@@ -1,10 +1,10 @@
-DROP PROCEDURE IF EXISTS create_instructor();
-DROP PROCEDURE IF EXISTS create_student();
-DROP PROCEDURE IF EXISTS create_course();
-DROP PROCEDURE IF EXISTS assign_teacher();
+DROP PROCEDURE IF EXISTS create_instructor;
+DROP PROCEDURE IF EXISTS create_student;
+DROP PROCEDURE IF EXISTS create_course;
+DROP PROCEDURE IF EXISTS assign_teacher;
 
 DELIMITER //
-SET @master_password = 'CS3425'
+SET @master_password = 'CS3425';
 
 -- Create Instructors account with temp password
 CREATE PROCEDURE create_instructor(IN ins_username VARCHAR(20), IN ins_name VARCHAR(50), OUT temp_password CHAR(10))
