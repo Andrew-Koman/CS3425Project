@@ -31,12 +31,12 @@ CALL assign_teacher(1, 1);
 CALL assign_teacher(3, 2);
 
 # Insert the rest of the data
-LOAD DATA LOCAL INFILE './sample_data/exams.csv' INTO TABLE exams;
-LOAD DATA LOCAL INFILE './sample_data/questions.csv' INTO TABLE questions;
-LOAD DATA LOCAL INFILE './sample_data/answers.csv' INTO TABLE answers;
-LOAD DATA LOCAL INFILE './sample_data/student_answers.csv' INTO TABLE student_answers;
-LOAD DATA LOCAL INFILE './sample_data/takes_course.csv' INTO TABLE takes_course;
-LOAD DATA LOCAL INFILE './sample_data/takes_exam.csv' INTO TABLE takes_exam;
+LOAD DATA INFILE '/sample_data/exams.csv' INTO TABLE exams FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+LOAD DATA INFILE '/sample_data/questions.csv' INTO TABLE questions FIELDS TERMINATED BY ',' ENCLOSED BY '"' IGNORE 1 LINES;
+LOAD DATA INFILE '/sample_data/answers.csv' INTO TABLE answers FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+LOAD DATA INFILE '/sample_data/student_answers.csv' INTO TABLE student_answers FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+LOAD DATA INFILE '/sample_data/takes_course.csv' INTO TABLE takes_course FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+LOAD DATA INFILE '/sample_data/takes_exam.csv' INTO TABLE takes_exam FIELDS TERMINATED BY ',' IGNORE 1 LINES;
 
 # Show data in all tables
 SELECT * FROM answers;

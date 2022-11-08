@@ -1,8 +1,8 @@
 question_id,exam_id,description,points
-1,1,Which house is primarily associated with gold?,3
-2,1,Which major house does not have a living creature in its sigil?,3
-3,1,The Sigil of House Stark is the only major sigil to not contain color,3
-4,2,What kingdom is the largest in terms of landmass?,2
-5,2,What kingdom is the largest in terms of population?,2
+1,1,"Which house is primarily associated with gold?",3
+2,1,"Which major house does not have a living creature in its sigil?",3
+3,1,"The Sigil of House Stark is the only major sigil to not contain color",3
+4,2,"What kingdom is the largest in terms of landmass?",2
+5,2,"What kingdom is the largest in terms of population?",2
 6,2,"The kingdoms south of Kings Landing are Dorne, The Reach, and ___________",2
-7,2,The Iron Islands are a region separate from any of the 7 kingdoms,2
+7,2,"The Iron Islands are a region separate from any of the 7 kingdoms",2
