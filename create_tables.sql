@@ -75,7 +75,7 @@ CREATE TABLE takes_exam(
     exam_id int NOT NULL,
     start_time DATETIME,
     end_time DATETIME,
-    exam_grade numeric(3,2),
+    score int,
 
     FOREIGN KEY(student_id) REFERENCES students(student_id),
     FOREIGN KEY(exam_id) REFERENCES exams(exam_id)-- 
