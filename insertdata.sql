@@ -27,8 +27,8 @@ CALL create_course('Houses and Sigils', 3);
 CALL create_course('Geography', 4);
 
 # Assign Teachers to Courses
-CALL assign_teacher( 1, 1 );
-CALL assign_teacher(2, 3);
+CALL assign_teacher(1, 1);
+CALL assign_teacher(3, 2);
 
 # Insert the rest of the data
 LOAD DATA LOCAL INFILE './sample_data/exams.csv' INTO TABLE exams;
