@@ -37,3 +37,14 @@ LOAD DATA LOCAL INFILE './sample_data/answers.csv' INTO TABLE answers;
 LOAD DATA LOCAL INFILE './sample_data/student_answers.csv' INTO TABLE student_answers;
 LOAD DATA LOCAL INFILE './sample_data/takes_course.csv' INTO TABLE takes_course;
 LOAD DATA LOCAL INFILE './sample_data/takes_exam.csv' INTO TABLE takes_exam;
+
+# Show data in all tables
+SELECT * FROM answers;
+SELECT * FROM courses;
+SELECT * FROM exams;
+SELECT * FROM instructors;
+SELECT * FROM questions;
+SELECT * FROM student_answers;
+SELECT * FROM students;
+SELECT * FROM takes_course;
+SELECT * FROM takes_exam;
