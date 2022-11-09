@@ -1,7 +1,7 @@
 DROP TRIGGER IF EXISTS autograder;
 DELIMITER //
 CREATE TRIGGER autograder
-    AFTER UPDATE ON student_answers
+    AFTER INSERT ON student_answers
     FOR EACH ROW
     BEGIN
     UPDATE takes_exam
