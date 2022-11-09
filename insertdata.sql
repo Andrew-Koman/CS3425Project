@@ -34,24 +34,25 @@ CALL assign_teacher(3, 2);
 LOAD DATA LOCAL INFILE './sample_data/exams.csv' INTO TABLE exams FIELDS TERMINATED BY ',' IGNORE 1 LINES;
 LOAD DATA LOCAL INFILE './sample_data/questions.csv' INTO TABLE questions FIELDS TERMINATED BY ',' ENCLOSED BY '"' IGNORE 1 LINES;
 LOAD DATA LOCAL INFILE './sample_data/answers.csv' INTO TABLE answers FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+LOAD DATA LOCAL INFILE './sample_data/takes_exam.csv' INTO TABLE takes_exam FIELDS TERMINATED BY ',' IGNORE 1 LINES;
 LOAD DATA LOCAL INFILE './sample_data/student_answers.csv' INTO TABLE student_answers FIELDS TERMINATED BY ',' IGNORE 1 LINES;
 LOAD DATA LOCAL INFILE './sample_data/takes_course.csv' INTO TABLE takes_course FIELDS TERMINATED BY ',' IGNORE 1 LINES;
-LOAD DATA LOCAL INFILE './sample_data/takes_exam.csv'
-    INTO TABLE takes_exam
-    FIELDS TERMINATED BY ','
-    IGNORE 1 LINES
-    (student_id, exam_id, @start_time, @end_time, @score)
-    SET score = NULL,
-        start_time = NULLIF(@start_time, ''),
-        end_time = NULLIF(@end_time, '');
+# LOAD DATA LOCAL INFILE './sample_data/takes_exam.csv'
+#     INTO TABLE takes_exam
+#     FIELDS TERMINATED BY ','
+#     IGNORE 1 LINES
+#     (student_id, exam_id, @start_time, @end_time, @score)
+#     SET score = NULL,
+#         start_time = NULLIF(@start_time, ''),
+#         end_time = NULLIF(@end_time, '');
 
 # Show data in all tables
-SELECT * FROM answers;
-SELECT * FROM courses;
-SELECT * FROM exams;
-SELECT * FROM instructors;
-SELECT * FROM questions;
-SELECT * FROM student_answers;
-SELECT * FROM students;
-SELECT * FROM takes_course;
-SELECT * FROM takes_exam;
+# SELECT * FROM answers;
+# SELECT * FROM courses;
+# SELECT * FROM exams;
+# SELECT * FROM instructors;
+# SELECT * FROM questions;
+# SELECT * FROM student_answers;
+# SELECT * FROM students;
+# SELECT * FROM takes_course;
+# SELECT * FROM takes_exam;

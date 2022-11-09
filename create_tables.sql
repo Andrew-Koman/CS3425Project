@@ -65,6 +65,7 @@ CREATE TABLE students(
 CREATE TABLE student_answers(
     student_id int NOT NULL,
     answer_id int NOT NULL,
+    earned_points int,
 
     FOREIGN KEY(student_id) REFERENCES students(student_id),
     FOREIGN KEY(answer_id) REFERENCES answers(answer_id)
@@ -78,7 +79,7 @@ CREATE TABLE takes_exam(
     score int,
 
     FOREIGN KEY(student_id) REFERENCES students(student_id),
-    FOREIGN KEY(exam_id) REFERENCES exams(exam_id)-- 
+    FOREIGN KEY(exam_id) REFERENCES exams(exam_id)
 );
 
 CREATE TABLE takes_course(
