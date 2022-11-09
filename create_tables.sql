@@ -65,6 +65,7 @@ CREATE TABLE students(
 CREATE TABLE student_answers(
     student_id int NOT NULL,
     answer_id int NOT NULL,
+    earned_points int,
 
     FOREIGN KEY(student_id) REFERENCES students(student_id),
     FOREIGN KEY(answer_id) REFERENCES answers(answer_id)
