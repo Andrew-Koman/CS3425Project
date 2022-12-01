@@ -12,7 +12,8 @@ CREATE TABLE instructors(
     instructor_id int PRIMARY KEY AUTO_INCREMENT,
     username varchar(20) NOT NULL,
     name varchar(50) NOT NULL,
-    password char(64) NOT NULL
+    password char(64) NOT NULL,
+    change_password boolean NOT NULL
 );
 
 CREATE TABLE courses(
@@ -59,7 +60,8 @@ CREATE TABLE students(
     student_id int PRIMARY KEY AUTO_INCREMENT,
     username varchar(20) NOT NULL,
     name varchar(50) NOT NULL,
-    password char(64) NOT NULL
+    password char(64) NOT NULL,
+    change_password boolean NOT NULL
 );
 
 CREATE TABLE student_answers(
