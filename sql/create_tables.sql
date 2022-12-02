@@ -13,7 +13,7 @@ CREATE TABLE instructors(
     username varchar(20) NOT NULL,
     name varchar(50) NOT NULL,
     password char(64) NOT NULL,
-    change_password boolean NOT NULL
+    change_password boolean NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE courses(
@@ -61,7 +61,7 @@ CREATE TABLE students(
     username varchar(20) NOT NULL,
     name varchar(50) NOT NULL,
     password char(64) NOT NULL,
-    change_password boolean NOT NULL
+    change_password boolean NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE student_answers(

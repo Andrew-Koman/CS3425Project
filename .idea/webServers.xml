@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ef3a1cc1-37c1-469f-9ef6-c29af9562a6c" name="WOPR" url="https://classdb.it.mtu.edu/">
+        <fileTransfer accessType="SFTP" host="wopr.csl.mtu.edu" port="22" sshConfigId="1d3e65f2-db47-4576-8a4e-0229c8f5fbb0" sshConfig="ajkoman@wopr.csl.mtu.edu:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

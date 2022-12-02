@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="WOPR" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="WOPR">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/local/group_projects/cs3425/cr4zy_smrt" local="$PROJECT_DIR$" web="/cs3425/cr4zy_smrt/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
