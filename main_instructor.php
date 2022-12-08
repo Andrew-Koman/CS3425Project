@@ -6,7 +6,7 @@ if (!isset($_SESSION["username"]) || $_SESSION["user_type"] != "instructors") {
     header("Location: ./login.php");
     return;
 }
-echo '<p style="text-align: right"> Welcome ' . $_SESSION["username"] . '</p>';
+echo '<p style="text-align: right"> Welcome ' . getName($_SESSION["username"]) . '</p>';
 ?>
 <form method="post" action="login.php">
     <p style="text-align: right">

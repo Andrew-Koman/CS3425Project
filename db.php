@@ -78,7 +78,12 @@ function getName(string $username): string
 {
     $dbh = connectDB();
 
-    $statement = $dbh -> prepare("SELECT name FROM instructors UNION ALL students WHERE username = :username");
+    $statement = $dbh -> prepare("SELECT name
+        FROM
+        (SELECT name, username FROM instructors
+        UNION
+        SELECT name, username FROM students) as x
+        WHERE username = :username");
     $statement -> bindParam(":username", $username);
     $statement -> execute();
     $row = $statement -> fetch();
