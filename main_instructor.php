@@ -1,3 +1,5 @@
+<style><?php include 'style.css'; ?></style>
+
 <?php
 session_start();
 

@@ -142,11 +142,19 @@ function getCoursesIns(string $username) {
     if( !$result ){
         return "<p>No Courses Found!</p>";
     }
-    createTable($result);
+    $headers = array("id", "title", "credit", "exam_name", "open_time", "close_time", "total_points");
+    createTable($result, $headers);
 }
 
-function createTable( array $result) {
-    $headers = array("id", "title", "credit", "exam_name", "open_time", "close_time", "total_points");
+function createTable( array $result, array $headers) {
+    if (count($result[0])/2 != count($headers)){
+        return;
+    }
+
+    echo "<pre>";
+    print_r($result);
+    echo "</pre>";
+
     $numExams = count($result);
     echo "<table>";
     echo "<tr>";
@@ -157,8 +165,8 @@ function createTable( array $result) {
     for ($i = 0; $i < $numExams; $i++){
         echo "<tr>";
         $row = $result[$i];
-        foreach ($row as $value){
-            echo "<td>$value</td>";
+        for ($j = 0; $j < count($row) / 2; $j++){
+            echo "<td>$row[$j]</td>";
         }
         echo "</tr>";
     }
