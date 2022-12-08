@@ -23,7 +23,6 @@
             </div>
             <br>
             <input type="submit" value="Login" name="login" style="padding: 5px; width: 100%">
-            <!--                    <p style="visibility: hidden; color: red">Incorrect username or password</p>-->
         </form>
     </div>
     </body>
@@ -52,6 +51,7 @@ if( isset($_POST["login"])) {
         }
         if (checkPasswordReset($_SESSION["username"], $_SESSION["user_type"]) ){
             header("Location: changePassword.php");
+            return;
         }
 
         switch ($_SESSION["user_type"]) {

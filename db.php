@@ -61,7 +61,6 @@ function checkPasswordReset($username, $userType ) {
     $statement -> bindParam(":username", $username);
     $statement -> execute();
     $row = $statement -> fetch();
-
     return $row[0];
 }
 
@@ -96,4 +95,56 @@ function getName(string $username): string
     $statement -> execute();
     $row = $statement -> fetch();
     return $row[0];
+}
+
+function getInstructorId(string $username) {
+    $dbh = connectDB();
+
+    $statement = $dbh -> prepare("SELECT instructor_id FROM instructors WHERE username = :username");
+    $statement -> bindParam(":username", $username);
+    $statement -> execute();
+    return ($statement -> fetch())[0];
+}
+
+function getCoursesIns(string $username) {
+    $dbh = connectDB();
+
+    $statement = $dbh -> prepare("SELECT courses.course_id, title, credits, exams.name, open_time, close_time,
+               (SELECT sum(points) FROM questions WHERE questions.exam_id = exams.exam_id ) AS total_points
+        FROM
+            instructors
+            NATURAL JOIN
+            courses
+            JOIN
+            exams ON courses.course_id = exams.course_id
+        WHERE instructor_id = :id; ");
+
+    $id = getInstructorId($username);
+    $statement -> bindParam(":id", $id);
+    $statement -> execute();
+    $result = $statement -> fetchAll();
+    if( !$result ){
+        return "<p>No Courses Found!</p>";
+    }
+    createTable($result);
+}
+
+function createTable( array $result) {
+    $headers = array("id", "title", "credit", "exam_name", "open_time", "close_time", "total_points");
+    $numExams = count($result);
+    echo "<table>";
+    echo "<tr>";
+    foreach ($headers as $header) {
+        echo "<th>$header</th>";
+    }
+    echo "</tr>";
+    for ($i = 0; $i < $numExams; $i++){
+        echo "<tr>";
+        $row = $result[$i];
+        foreach ($row as $value){
+            echo "<td>$value</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table>";
 }
