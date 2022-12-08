@@ -2,6 +2,8 @@ DROP PROCEDURE IF EXISTS create_instructor;
 DROP PROCEDURE IF EXISTS create_student;
 DROP PROCEDURE IF EXISTS create_course;
 DROP PROCEDURE IF EXISTS assign_teacher;
+DROP PROCEDURE IF EXISTS enroll_student;
+
 
 DELIMITER //
 -- SET @master_password = 'CS3425';
@@ -31,6 +33,12 @@ BEGIN
     UPDATE courses
     SET instructor_id = ins_id
     WHERE course_id = crse_id;
+END//
+
+-- Add student to a course
+CREATE PROCEDURE enroll_student(IN stu_id INT, IN crse_id INT)
+BEGIN
+    INSERT INTO takes_course VALUES(stu_id, crse_id)
 END//
 
 DELIMITER ;
