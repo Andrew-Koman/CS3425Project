@@ -97,11 +97,27 @@ function getName(string $username): string
     return $row[0];
 }
 
-function getInstructorId(string $username) {
+function getInstructorId(string $username):int{
     $dbh = connectDB();
 
     $statement = $dbh -> prepare("SELECT instructor_id FROM instructors WHERE username = :username");
     $statement -> bindParam(":username", $username);
+    $statement -> execute();
+    return ($statement -> fetch())[0];
+}
+
+function getStudentId(string $username):int{
+    $dbh = connectDB();
+    $statement = $dbh ->prepare("SELECT student_id FROM student WHERE username = :username");
+    $statement -> bindParam(":username", $username);
+    $statement -> execute();
+    return ($statement -> fetch())[0];
+}
+
+function getCourseTitle(int $course_id):string{
+    $dbh = connectDB();
+    $statement = $dbh ->prepare("SELECT title FROM courses WHERE course_id = :course_id");
+    $statement -> bindParam(":course_id", $course_id);
     $statement -> execute();
     return ($statement -> fetch())[0];
 }
