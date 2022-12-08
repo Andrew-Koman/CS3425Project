@@ -7,6 +7,14 @@ function connectDB(): PDO
     return $dbh;
 }
 
+function is_logged_on(){
+    session_start();
+    if(!isset($_SESSION['username'])){
+        header("Location: login.php");
+        return;
+    }
+}
+
 /**
  * @param $user
  * @param $password
