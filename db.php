@@ -47,7 +47,7 @@ function authenticate($user, $password): int
     }
 }
 
-function checkPasswordReset($username, $userType ){
+function checkPasswordReset($username, $userType ) {
     $dbh = connectDB();
     $statement = $dbh -> prepare("SELECT change_password FROM $userType WHERE username = :username");
     $statement -> bindParam(":username", $username);
@@ -67,4 +67,20 @@ function changePassword($username, $userType, $password) {
     $statement -> bindParam(":password", $password);
 
     $statement -> execute();
+}
+
+/**
+ * Get full name for username
+ * @param $username string Account username
+ * @return string Full name corresponding to username
+ */
+function getName(string $username): string
+{
+    $dbh = connectDB();
+
+    $statement = $dbh -> prepare("SELECT name FROM instructors UNION ALL students WHERE username = :username");
+    $statement -> bindParam(":username", $username);
+    $statement -> execute();
+    $row = $statement -> fetch();
+    return $row[0];
 }
