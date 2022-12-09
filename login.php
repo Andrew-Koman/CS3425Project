@@ -32,6 +32,10 @@ require "db.php";
 
 session_start();
 
+if( isset($_POST["logout"])) {
+    session_destroy();
+}
+
 echo "<pre>";
 print_r($_POST);
 print_r($_SESSION);
@@ -59,10 +63,6 @@ if( isset($_POST["login"])) {
     else {
         echo '<p style="color:red">Incorrect username and password</p>';
     }
-}
-
-if( isset($_POST["logout"])) {
-    session_destroy();
 }
 
 ?>
