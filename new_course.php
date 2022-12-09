@@ -1,5 +1,6 @@
 <?php
 include "db.php";
+include "web_funcs";
 
 session_start();
 is_logged_on();
