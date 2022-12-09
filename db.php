@@ -15,8 +15,7 @@ function connectDB(): PDO
  * 1 if student found
  * 2 if instructor found
  */
-function authenticate($user, $password): int
-{
+function authenticate($user, $password): int {
     try {
         $dbh = connectDB();
         $statement = $dbh -> prepare("SELECT count(*) FROM students WHERE username= :username AND password = sha2(:password, 256)");
@@ -79,8 +78,7 @@ function changePassword($username, $userType, $password) {
  * @param $username string Account username
  * @return string Full name corresponding to username
  */
-function getName(string $username): string
-{
+function getName(string $username): string {
     $dbh = connectDB();
 
     $statement = $dbh -> prepare("SELECT name
@@ -119,7 +117,7 @@ function getCourseTitle(int $course_id):string{
     return ($statement -> fetch())[0];
 }
 
-function getCoursesIns(string $username) {
+function getCoursesInstructor(string $username) {
     $dbh = connectDB();
 
     $statement = $dbh -> prepare("SELECT courses.course_id, title, credits, exams.name, open_time, close_time,

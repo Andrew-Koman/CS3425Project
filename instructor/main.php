@@ -21,5 +21,5 @@ echo '<p> Welcome ' . getName($_SESSION["username"]) . '</p>';
 
 <h1>Current Courses:</h1>
 <?php
-    print_r(getCoursesIns($_SESSION["username"]));
+    print_r(getCoursesInstructor($_SESSION["username"]));
 ?>
