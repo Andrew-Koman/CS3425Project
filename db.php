@@ -8,6 +8,7 @@ function connectDB(): PDO
 }
 
 function is_logged_on(){
+    // Checks if the username is set, then returns to login if it isn't
     session_start();
     if(!isset($_SESSION['username'])){
         header("Location: login.php");
@@ -55,18 +56,24 @@ function authenticate($user, $password): int
     }
 }
 
-function checkPasswordReset($username, $userType ) {
+/**
+ * Checks if the user needs to reset their password, 
+ * and redirects to the password reset if they do
+ */
+function checkPasswordReset($username, $userType ):void {
     $dbh = connectDB();
     $statement = $dbh -> prepare("SELECT change_password FROM $userType WHERE username = :username");
     $statement -> bindParam(":username", $username);
     $statement -> execute();
     $row = $statement -> fetch();
-    return $row[0];
+    if ($row[0]){
+        header("Location: changePassword.php");
+    }
+    return;
 }
 
 function changePassword($username, $userType, $password) {
     $dbh = connectDB();
-
     $statement = $dbh -> prepare("UPDATE $userType " .
         "SET password = sha2(:password, 256), change_password = 0 " .
         "WHERE username = :username");
@@ -99,7 +106,6 @@ function getName(string $username): string
 
 function getInstructorId(string $username):int{
     $dbh = connectDB();
-
     $statement = $dbh -> prepare("SELECT instructor_id FROM instructors WHERE username = :username");
     $statement -> bindParam(":username", $username);
     $statement -> execute();
