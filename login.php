@@ -45,15 +45,15 @@ if( isset($_POST["login"])) {
         // Setting user type and edit header depending on user type
         if ($auth == 1) {
             $_SESSION["user_type"] = "students";
-            header("Location: main_student.php");
+            header("Location: ./student/main.php");
         }
         else if ($auth == 2) {
             $_SESSION["user_type"] = "instructors";
-            header("Location: main_instructor.php");
+            header("Location: ./instructor/main.php");
         }
 
         checkPasswordReset($_SESSION["username"], $_SESSION["user_type"]);
-        
+
         return;
     }
     else {
