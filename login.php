@@ -42,28 +42,18 @@ if( isset($_POST["login"])) {
     if ( $auth > 0) {
         $_SESSION["username"] = $_POST["username"];
 
-
+        // Setting user type and edit header depending on user type
         if ($auth == 1) {
             $_SESSION["user_type"] = "students";
+            header("Location: main_student.php");
         }
         else if ($auth == 2) {
             $_SESSION["user_type"] = "instructors";
-        }
-        if (checkPasswordReset($_SESSION["username"], $_SESSION["user_type"]) ){
-            header("Location: changePassword.php");
-            return;
+            header("Location: main_instructor.php");
         }
 
-        switch ($_SESSION["user_type"]) {
-            case "students":
-                header("Location: main_student.php");
-                break;
-            case "instructors":
-                header("Location: main_instructor.php");
-                break;
-            default:
-                echo '<p style="color: red"> ERROR: user type not valid </p>';
-        }
+        checkPasswordReset($_SESSION["username"], $_SESSION["user_type"]);
+        
         return;
     }
     else {
