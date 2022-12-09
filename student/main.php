@@ -14,7 +14,7 @@
 
     $username = $_SESSION['username'];
     $name = getName($username);
-    echo "<p>Welcome $name, Welcome!</p>"; 
+    echo "<p>Welcome $name!</p>"; 
 ?>
 
 <form method="post" action="login.php">

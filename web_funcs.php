@@ -17,14 +17,14 @@ function createTable( array $result, array $headers) {
     print_r($result);
     echo "</pre>";
 
-    $numExams = count($result);
+    $num = count($result);
     echo "<table>";
     echo "<tr>";
     foreach ($headers as $header) {
         echo "<th>$header</th>";
     }
     echo "</tr>";
-    for ($i = 0; $i < $numExams; $i++){
+    for ($i = 0; $i < $num; $i++){
         echo "<tr>";
         $row = $result[$i];
         for ($j = 0; $j < count($row) / 2; $j++){
