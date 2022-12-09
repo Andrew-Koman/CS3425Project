@@ -4,8 +4,10 @@
     session_start();
     is_logged_on();
 
+    // If the user is not a student, exit the session and return to login
     if($_SESSION['user_type'] != 'students'){
         header("Location: login.php");
+        session_destroy();
         return;
     }
 
