@@ -30,10 +30,10 @@ echo '<p> Welcome ' . getName($_SESSION["username"]) . '!</p>';
 </p>
 <form method="post">
     <label for="course">Course:</label>
-    <input type="text" name="course" id="course">
+    <input type="text" name="course" id="course" required="required">
     <br>
-    <label for="exam">Exam</label>
-    <input type="text" name="exam" id="exam">
+    <label for="exam">Exam:</label>
+    <input type="text" name="exam" id="exam" required="required">
     <br>
     <button type="submit" formaction="check_score.php" value="check_score" name="check_score">Check Score</button>
     <button type="submit" formaction="review_exam.php" value="review_exam" name="review_exam">Review Exam</button>
