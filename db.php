@@ -115,7 +115,12 @@ function getCourseTitle(int $course_id):string{
     $statement = $dbh ->prepare("SELECT title FROM courses WHERE course_id = :course_id");
     $statement -> bindParam(":course_id", $course_id);
     $statement -> execute();
-    return ($statement -> fetch())[0];
+    $val = $statement -> fetch();
+    if ($val){
+        return FALSE; 
+    } else {
+        return $val[0];
+    }
 }
 
 function getCoursesInstructor(string $username): ?string
