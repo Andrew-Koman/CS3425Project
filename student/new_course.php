@@ -11,6 +11,11 @@ if (!isset($_POST['new_course'])){
 
 $course_id = $_POST['new_course'];
 $course_title = getCourseTitle(intval($course_id));
+
+if (!$course_title){
+    echo '<p style="color: red">Unknown course id: '.$course_id.'</p>';
+}
+
 $student = $_SESSION['student']; 
 $student_id = getStudentId($student);
 
@@ -39,5 +44,8 @@ if (!$row){
         echo '<p style="color: red>Enrollment failed!</p>';
     }
 }
-
 ?>
+
+<form method="post" action="main.php">
+        <input type="submit" value="Go Back" name="go_main">
+</form>
