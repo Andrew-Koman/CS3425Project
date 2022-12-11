@@ -37,8 +37,8 @@ if( isset($_POST["logout"])) {
 }
 
 echo "<pre>";
-echo "instructor: U estark, P w1nter";
-echo "student: U jsnow, P TheWall";
+echo "<p>instructor: U estark, P w1nter</p>";
+echo "<p>student: U jsnow, P TheWall</p>";
 print_r($_POST);
 print_r($_SESSION);
 echo "</pre>";

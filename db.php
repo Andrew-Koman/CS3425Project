@@ -1,4 +1,6 @@
 <?php
+
+require "web_funcs.php";
 function connectDB(): PDO
 {
     $config = parse_ini_file("db.ini");
@@ -59,7 +61,6 @@ function checkPasswordReset($username, $userType ):void {
     if ($row[0]){
         header("Location: changePassword.php");
     }
-    return;
 }
 
 function changePassword($username, $userType, $password) {
@@ -103,7 +104,7 @@ function getInstructorId(string $username):int{
 
 function getStudentId(string $username):int{
     $dbh = connectDB();
-    $statement = $dbh ->prepare("SELECT student_id FROM student WHERE username = :username");
+    $statement = $dbh ->prepare("SELECT student_id FROM students WHERE username = :username");
     $statement -> bindParam(":username", $username);
     $statement -> execute();
     return ($statement -> fetch())[0];
@@ -117,7 +118,8 @@ function getCourseTitle(int $course_id):string{
     return ($statement -> fetch())[0];
 }
 
-function getCoursesInstructor(string $username) {
+function getCoursesInstructor(string $username): ?string
+{
     $dbh = connectDB();
 
     $statement = $dbh -> prepare("SELECT courses.course_id, title, credits, exams.name, open_time, close_time,
@@ -139,6 +141,7 @@ function getCoursesInstructor(string $username) {
     }
     $headers = array("id", "title", "credit", "exam_name", "open_time", "close_time", "total_points");
     createTable($result, $headers);
+    return null;
 }
 
 ?>
