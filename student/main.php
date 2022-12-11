@@ -46,7 +46,7 @@ echo "!! table !!";
 </p>
 <form method="post">
     <label for="course">Course:</label>
-    <input type="text" name="course" id="course">
+    <input type="text" name="course" id="course" required="required">
     <br>
     <label for="exam">Exam:</label>
     <input type="text" name="exam" id="exam">
