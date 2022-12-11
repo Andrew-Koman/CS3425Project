@@ -2,7 +2,6 @@
     All exam-related functions for both students and instructors
  -->
 <?php
-include "db.php";
 
 function getQuestions(int $exam_id):array{
     return [];
