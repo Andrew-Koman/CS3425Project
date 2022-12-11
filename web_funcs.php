@@ -1,10 +1,8 @@
 <?php
 function is_logged_on(){
-    // Checks if the username is set, then returns to login if it isn't
-    session_start();
+    // Checks if the username is set, then returns to log in if it isn't
     if(!isset($_SESSION['username'])){
         header("Location: login.php");
-        return;
     }
 }
 
