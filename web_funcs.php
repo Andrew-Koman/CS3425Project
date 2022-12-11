@@ -11,9 +11,9 @@ function createTable( array $result, array $headers) {
         return;
     }
 
-    echo "<pre>";
-    print_r($result);
-    echo "</pre>";
+//    echo "<pre>";
+//    print_r($result);
+//    echo "</pre>";
 
     $num = count($result);
     echo "<table>";

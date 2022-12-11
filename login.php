@@ -36,6 +36,17 @@ if( isset($_POST["logout"])) {
     session_destroy();
 }
 
+if( isset($_SESSION["user_type"])){
+    switch ($_SESSION["user_type"]){
+        case "instructors":
+            header("Location: ./instructor/main.php");
+            break;
+        case "students":
+            header("Location: ./student/main.php");
+            break;
+    }
+}
+
 echo "<pre>";
 echo "<p>instructor: U estark, P w1nter</p>";
 echo "<p>student: U jsnow, P TheWall</p>";

@@ -14,7 +14,7 @@ if (!isset($_SESSION["username"]) || $_SESSION["user_type"] != "instructors") {
     header("Location: ./login.php");
     return;
 }
-echo '<p> Welcome ' . getName($_SESSION["username"]) . '</p>';
+echo '<p> Welcome ' . getName($_SESSION["username"]) . '!</p>';
 ?>
 <form method="post" action="../login.php">
     <input type="submit" value="Logout" name="logout">
@@ -26,11 +26,7 @@ echo '<p> Welcome ' . getName($_SESSION["username"]) . '</p>';
 ?>
 
 <p>
-    Lorem Ipsum    
-    <br>
-    Lorem Ipsum    
-    <br>
-    Lorem Ipsum
+    Please enter the course id and the exam name to see the score of students.
 </p>
 <form method="post">
     <label for="course">Course:</label>
