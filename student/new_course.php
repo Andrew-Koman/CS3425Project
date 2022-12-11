@@ -1,17 +1,16 @@
 <?php
-include "db.php";
-include "web_funcs";
+include "../db.php";
 
 session_start();
 is_logged_on();
 
 if (!isset($_POST['new_course'])){
-    header("Location: main_student.php");
+    header("Location: main.php");
     return;
 }
 
 $course_id = $_POST['new_course'];
-$course_title = getCourseTitle($course_id);
+$course_title = getCourseTitle(intval($course_id));
 $student = $_SESSION['student']; 
 $student_id = getStudentId($student);
 
