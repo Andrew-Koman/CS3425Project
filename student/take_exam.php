@@ -9,7 +9,8 @@
 session_start();
 include "../exam.php";
 
-if (!isset($_POST["take_exam"]) && !isset($_POST["submit"]) || isset($_POST["exam"]) && examComplete($_POST["exam"], $_SESSION["username"], $_POST["course"])) {
+if (!isset($_POST["take_exam"]) && !isset($_POST["submit"]) ||
+    isset($_POST["exam"]) && examComplete($_POST["exam"], $_SESSION["username"], $_POST["course"])) {
     header("Location: main.php");
     die();
 }
@@ -26,13 +27,22 @@ if (!isset($_SESSION["exam"]) && !isset($_SESSION["course"])) {
     }
 }
 
+switch (examIsOpen($_SESSION["exam"], $_SESSION["course"])){
+    case 1 :
+        echo "<p style='color: red'>Exam is not open yet</p>";
+        echo "<p>Exam " . $_POST['exam'] . " opens at " . getExamOpen($_POST["exam"], $_POST["course"]) . "</p>";
+        echo "<form action='main.php'><button type='submit'>Go Back</button></form>";
+        die();
+    case 2 :
+        echo "<p style='color: red'>The exam is already closed</p>";
+        echo "<p>Exam " . $_POST['exam'] . " closed at " . getExamClose($_POST["exam"], $_POST["course"]) . "</p>";
+        echo "<form action='main.php'><button type='submit'>Go Back</button></form>";
+        die();
+    case 0 :
+    default:
+        break;
+}
 
-// echo "<pre>";
-// echo "<p>Post:</p>";
-// print_r($_POST);
-// echo "<p>Session:</p>";
-// print_r($_SESSION);
-// echo "</pre>";
 $student_id = getStudentId($_SESSION["username"]);
 
 if ( isset($_SESSION["exam"]) && $_SESSION["exam"] != "" && !examExists($_SESSION["exam"], $_SESSION["course"])){
@@ -51,7 +61,7 @@ if ( isset($_SESSION["exam"]) && $_SESSION["exam"] != "" && !examExists($_SESSIO
         $choices = getChoices($question["question_id"]);
         echo "<div style='margin-left: 20px'>";
         foreach ($choices as $choice) {
-            echo "<input type='radio' id='" . $question["question_id"] . "' name='" . $question["question_id"] . "' value = '" . $choice["answer_letter"] . "'>";
+            echo "<input required='required' type='radio' id='" . $question["question_id"] . "' name='" . $question["question_id"] . "' value = '" . $choice["answer_letter"] . "'>";
             echo "<label for='" . $question["question_id"] . "'> " . $choice["answer_letter"] . ": " . $choice["answer"] . "<br>";
         }
         echo "</div>";
