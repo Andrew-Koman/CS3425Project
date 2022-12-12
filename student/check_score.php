@@ -14,6 +14,11 @@ $exam_name = $_POST['exam'];
 $student = $_SESSION['username']; 
 $student_id = getStudentId($student);
 
+if(!examExists($exam_name, $course_id)){
+    header("Location: main.php");
+    return;
+}
+
 $dbh = connectDB();
 $statement = $dbh -> prepare('
     SELECT score, start_time, end_time, (end_time - start_time)
