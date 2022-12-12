@@ -90,7 +90,7 @@ function getExamName(int $exam_id) : string {
 }
 
 // prints the results tables
-function printResults($exam_id, $student_id){
+function printExamResults($exam_id, $student_id){
     $dbh = connectDB();
     $dbh -> beginTransaction();
     $statement = $dbh -> prepare("SELECT score, start_time, end_time, TIMESTAMPDIFF(SECOND, start_time, end_time) durration_in_sec
@@ -100,33 +100,36 @@ function printResults($exam_id, $student_id){
     $statement->execute();
     $stats_results = $statement->fetchAll();
 
-    $statement = $dbh -> prepare("SELECT a.question_id, description, a.answer_letter, s.earned_points,
-                                (SELECT ans.answer_letter FROM answers ans WHERE ans.is_correct = TRUE AND ans.question_id = q.question_id) correct
-                                FROM student_answers s JOIN answers a on s.answer_id = a.answer_id
-                                JOIN questions q on a.question_id = q.question_id
-                                WHERE student_id = :student");
-    $statement->bindParam(":student", $student_id);
-    $statement->execute();
-    $question_results = $statement->fetchAll();
+$statement = $dbh -> prepare('SELECT
+   question_id,
+   description,
+   answer,
+   (SELECT answer FROM questions NATURAL JOIN answers WHERE q.question_id = question_id AND is_correct = 1 LIMIT 1),
+   (answers.is_correct * q.points) as your_points
+FROM questions q
+NATURAL JOIN answers
+NATURAL JOIN student_answers
+NATURAL RIGHT JOIN exams
+WHERE student_id = :student_id
+AND exams.exam_id = :exam_id');
+$statement -> bindParam(":student_id", $student_id);
+$statement -> bindParam(":exam_id", $exam_id);
+$statement->execute();
+$question_results = $statement->fetchAll();
 
-    $dbh->commit();
-    if (count($question_results) == 0) {
-        echo "<p>Sorry. You have yet to take exam " . getExamName($exam_id) . "</p>";
-        echo "<form method='post' action='student/main.php'><input type='submit' value='Go Back' name='go_main'></form>";
-        die();
-    }
-    $headers = array("score", "start_time", "end_time", "durraction_in_sec");
-    createTable($stats_results, $headers);
-    echo "<br>";
-    $headers = array("q_id", "description", "yourAnswer", "yourPoints", "CorrectAnswer");
-    createTable($question_results, $headers);
+$dbh->commit();
+if (count($question_results) == 0) {
+    echo "<p>Sorry. You have yet to take exam " . getExamName($exam_id) . "</p>";
+    echo "<form method='post' action='student/main.php'><input type='submit' value='Go Back' name='go_main'></form>";
+    die();
+}
+$headers = array("score", "start_time", "end_time", "durraction_in_sec");
+createTable($stats_results, $headers);
+echo "<br>";
+$headers = array("q_id", "description", "answer", "correct_answer", "points_earned");
+createTable($question_results, $headers);
 }
 
-
-// Gets all info from the takes_exam table
-// function getStudentExams(int $exam_id){
-
-// }
 
 function examComplete(string $exam_name, string $username, int $course) : bool {
     $exam_id = getExamId($exam_name, $course);
