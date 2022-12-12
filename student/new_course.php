@@ -9,34 +9,38 @@
 session_start();
 include "../db.php";
 
+echo "<pre>";
+print_r($_POST);
+print_r($_SESSION);
+echo "</pre>";
 
 if (!isset($_POST['new_course'])){
     header("Location: main.php");
     return;
 }
 
-$course_id = $_POST['new_course'];
+$course_id = $_POST['course'];
 $course_title = getCourseTitle(intval($course_id));
 
 if (!$course_title){
     echo '<p style="color: red">Unknown course id: '.$course_id.'</p>';
 }
 
-$student = $_SESSION['student']; 
+$student = $_SESSION['username']; 
 $student_id = getStudentId($student);
 
 // Checking if the student is already enroled in the course_id
 $dbh = connectDB();
 $statement = $dbh -> prepare("SELECT * 
     FROM takes_course 
-    WHERE student_id = :student
+    WHERE student_id = :student_id
     AND course_id = :course_id");
-$statement -> bindParam(":student", $student);
+$statement -> bindParam(":student_id", $student_id);
 $statement -> bindParam(":course_id", $course_id);
 $statement -> execute();
-$row = $statement -> fetch();
+$row = $statement -> fetchAll();
 
-if (!$row){
+if (count($row) != 0){
     echo '<p style="color: red">You are already enrolled in'.$course_id.'!</p>';
 } else {
     // Use procedure enroll_student
