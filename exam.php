@@ -130,6 +130,66 @@ $headers = array("q_id", "description", "answer", "correct_answer", "points_earn
 createTable($question_results, $headers);
 }
 
+function getExamOpen(string $exam, int $course_id) {
+    try {
+        $dbh = connectDB();
+        $sqlstring = "select open_time from exams where course_id = :c_id and name=:exam";
+        $statement = $dbh->prepare($sqlstring);
+        $statement->bindParam(":c_id", $course_id);
+        $statement->bindParam(":exam", $exam);
+        $statement->execute();
+        $x = $statement->fetch();
+
+        return strtotime($x[0]);
+    } catch (PDOException $e) {
+        print "Error!" . $e->getMessage() . "<br/>";
+        die();
+    }
+}
+
+function getExamClose(string $exam, int $course_id) {
+    try {
+        $dbh = connectDB();
+        $sqlstring = "select close_time from exams where course_id = :c_id and name=:exam";
+        $statement = $dbh->prepare($sqlstring);
+        $statement->bindParam(":c_id", $course_id);
+        $statement->bindParam(":exam", $exam);
+        $statement->execute();
+        $x = $statement->fetch();
+
+        return strtotime($x[0]);
+    } catch (PDOException $e) {
+        print "Error!" . $e->getMessage() . "<br/>";
+        die();
+    }
+}
+
+function examIsOpen(string $exam, int $course_id) : int {
+    try {
+        $dbh = connectDB();
+        $sqlstring = "select open_time, close_time from exams where course_id = :c_id and name=:exam";
+        $statement = $dbh->prepare($sqlstring);
+        $statement->bindParam(":c_id", $course_id);
+        $statement->bindParam(":exam", $exam);
+        $statement->execute();
+        $x = $statement->fetch();
+
+        $start_time = strtotime($x[0]);
+        $end_time = strtotime($x[1]);
+        $now = strtotime(date('Y-m-d H:i:s'));
+
+        if ($now > $end_time) {
+            return 2;
+        } else if ($now < $start_time) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } catch (PDOException $e) {
+        print "Error!" . $e->getMessage() . "<br/>";
+        die();
+    }
+}
 
 function examComplete(string $exam_name, string $username, int $course) : bool {
     $exam_id = getExamId($exam_name, $course);
