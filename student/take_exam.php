@@ -41,13 +41,6 @@ switch (examIsOpen($_SESSION["exam"], $_SESSION["course"])){
         break;
 }
 
-
-// echo "<pre>";
-// echo "<p>Post:</p>";
-// print_r($_POST);
-// echo "<p>Session:</p>";
-// print_r($_SESSION);
-// echo "</pre>";
 $student_id = getStudentId($_SESSION["username"]);
 
 if ( isset($_SESSION["exam"]) && $_SESSION["exam"] != "" && !examExists($_SESSION["exam"], $_SESSION["course"])){
