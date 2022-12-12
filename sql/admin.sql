@@ -38,7 +38,7 @@ END//
 -- Add student to a course
 CREATE PROCEDURE enroll_student(IN stu_id INT, IN crse_id INT)
 BEGIN
-    INSERT INTO takes_course VALUES(stu_id, crse_id)
+    INSERT INTO takes_course VALUES(stu_id, crse_id);
 END//
 
 DELIMITER ;
