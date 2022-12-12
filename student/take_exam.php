@@ -44,9 +44,9 @@ if ( isset($_SESSION["exam"]) && $_SESSION["exam"] != "" && !examExists($_SESSIO
     $questions = getQuestions($exam_id);
     echo "<form method='post' action='take_exam.php'>";
 
-    $index = 0;
+    $index = 1;
     foreach ($questions as $question) {
-        echo "<p>Q" . $question["question_id"] . ": " . $question["description"] . " (" . $question["points"] . " points)</p>";
+        echo "<p>Q" . $index . ": " . $question["description"] . " (" . $question["points"] . " points)</p>";
 
         $choices = getChoices($question["question_id"]);
         echo "<div style='margin-left: 20px'>";
