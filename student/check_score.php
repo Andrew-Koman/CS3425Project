@@ -62,7 +62,6 @@ $statement -> execute();
 $val = $statement -> fetchAll();
 $head = array("question_id", "description", "answer", "correct_answer", "points_earned");
 createTable($val, $head);
-
 ?>
 
 

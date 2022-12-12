@@ -68,8 +68,6 @@ function completeExam(int $student_id, int $exam_id){
         print_r($exception);
         echo "</pre>";
         echo "<form action='student/main.php'><button type='submit'>Go Back</button></form>";
-        unset($_SESSION["exam"]);
-        unset($_SESSION["course"]);
         die();
     }
 }
@@ -84,15 +82,13 @@ function getAnswerId(string $answer_letter, int $question_id) : int{
 }
 
 // prints the results tables
-function printResults(){
+function printResults($exam_id, $student_id){
     $dbh = connectDB();
-    $student = getStudentId($_SESSION["username"]);
-    $exam = getExamId($_SESSION["exam"], $_SESSION["course"]);
     $dbh -> beginTransaction();
     $statement = $dbh -> prepare("SELECT score, start_time, end_time, TIMESTAMPDIFF(SECOND, start_time, end_time) durration_in_sec
                             FROM takes_exam WHERE exam_id = :exam AND student_id = :student");
-    $statement->bindParam(":student", $student);
-    $statement->bindParam(":exam", $exam);
+    $statement->bindParam(":student", $student_id);
+    $statement->bindParam(":exam", $exam_id);
     $statement->execute();
     $stats_results = $statement->fetchAll();
 
@@ -101,7 +97,7 @@ function printResults(){
                                 FROM student_answers s JOIN answers a on s.answer_id = a.answer_id
                                 JOIN questions q on a.question_id = q.question_id
                                 WHERE student_id = :student");
-    $statement->bindParam(":student", $student);
+    $statement->bindParam(":student", $student_id);
     $statement->execute();
     $question_results = $statement->fetchAll();
 
