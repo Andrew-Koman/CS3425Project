@@ -6,10 +6,11 @@ if (!isset($_SESSION['username']) && $_SERVER["REQUEST_URI"] != "/cs3425/cr4zy_s
     die();
 }
 
-function createTable( array $result, array $headers) {
+function createTable( array $result, array $headers): bool
+{
     if (count($result) == 0 || count($result[0])/2 != count($headers)){
         echo "<p style='color: red'>Error. Cannot display table</p>";
-        return;
+        return false;
     }
 
 //    echo "<pre>";
@@ -32,6 +33,7 @@ function createTable( array $result, array $headers) {
         echo "</tr>";
     }
     echo "</table>";
+    return true;
 }
 
 ?>

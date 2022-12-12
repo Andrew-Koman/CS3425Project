@@ -16,8 +16,9 @@ if ($_SESSION["user_type"] != "instructors") {
 }
 echo '<p> Welcome ' . getName($_SESSION["username"]) . '!</p>';
 ?>
-<form method="post" action="../login.php">
-    <input type="submit" value="Logout" name="logout">
+<form method="post">
+    <button type="submit" name="pwchange" formaction="../login.php">Logout</button>
+        <button type="submit" name="change_password" formaction="../changePassword.php">Change Password</button>
 </form>
 
 <h1>Current Courses:</h1>
