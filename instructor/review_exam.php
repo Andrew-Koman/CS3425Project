@@ -1,3 +1,10 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Exam</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+</html>
 <?php
 session_start();
 include "../exam.php";

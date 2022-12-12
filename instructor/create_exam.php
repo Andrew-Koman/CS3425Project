@@ -1,4 +1,6 @@
 <head>
+    <meta charset="UTF-8">
+    <title>Create Exam</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <html lang="en">

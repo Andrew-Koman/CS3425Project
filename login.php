@@ -2,10 +2,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <script>
-
-    </script>
     <body>
     <h1>Login</h1>
     <div style="border: thin black solid; width: fit-content; padding: 5px">

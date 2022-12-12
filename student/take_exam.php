@@ -1,3 +1,10 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Take Exam</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+</html>
 <?php
 session_start();
 include "../exam.php";
@@ -17,7 +24,7 @@ echo "</pre>";
 if (!examExists($_POST["exam"], $_POST["course"])){
     echo "<p style='color: red'>Error. Could not find exam</p>";
 } else {
-    $exam_id = getExamId($_POST["exam"]);
+    $exam_id = getExamId($_POST["exam"], $_POST["course"]);
     $questions = getQuestions($exam_id);
 }
 ?>

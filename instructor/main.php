@@ -1,5 +1,10 @@
-<style><?php include '../style.css'; ?></style>
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instructors</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+</html>
 <?php
 session_start();
 
@@ -17,8 +22,8 @@ if ($_SESSION["user_type"] != "instructors") {
 echo '<p> Welcome ' . getName($_SESSION["username"]) . '!</p>';
 ?>
 <form method="post">
-    <button type="submit" name="pwchange" formaction="../login.php">Logout</button>
-        <button type="submit" name="change_password" formaction="../changePassword.php">Change Password</button>
+    <button type="submit" name="logout" formaction="../login.php">Logout</button>
+    <button type="submit" name="pwchange" formaction="../changePassword.php">Change Password</button>
 </form>
 
 <h1>Current Courses:</h1>

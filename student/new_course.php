@@ -1,3 +1,10 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Course</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+</html>
 <?php
 session_start();
 include "../db.php";
