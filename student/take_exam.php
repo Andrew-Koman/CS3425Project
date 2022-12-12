@@ -22,12 +22,15 @@ echo "<p>Session:</p>";
 print_r($_SESSION);
 echo "</pre>";
 
+$student_id = getStudentId($_POST["username"]);
+
 if (!examExists($_POST["exam"], $_POST["course"])){
     echo "<p style='color: red'>Error. Could not find exam</p>";
 } else if (!isset($_POST["submit"])){
     $exam_id = getExamId($_POST["exam"], $_POST["course"]);
+    startExam($student_id, $exam_id);
+    
     $questions = getQuestions($exam_id);
-    startExam(getStudentId($_POST["username"]), getExamId($_POST["exam"], $_POST["course"]));
     echo "<form method='post' action='take_exam.php'>";
 
     $index = 0;
@@ -46,7 +49,7 @@ if (!examExists($_POST["exam"], $_POST["course"])){
     echo "<input type='submit' name='submit'>";
     echo "</form>";
 } else {
-    completeExam(getStudentId($_SESSION["username"]), getExamId($_POST["exam"], $_POST["course"]));
+    completeExam($student_id, getExamId($_POST["exam"], $_POST["course"]));
     echo "<form action='main.php'><button type='submit'>Go Back</button></form>";
 }
 
