@@ -63,6 +63,9 @@ function checkPasswordReset($username, $userType ):void {
     }
 }
 
+/**
+ * Changes password for given user id
+ */
 function changePassword($username, $userType, $password) {
     $dbh = connectDB();
     $statement = $dbh -> prepare("UPDATE $userType " .
@@ -123,18 +126,25 @@ function getCourseTitle(int $course_id):string{
     }
 }
 
+/**
+ * Gets the course information for the courses taught by the given instructor
+ */
 function getCoursesInstructor(string $username): ?string
 {
     $dbh = connectDB();
 
-    $statement = $dbh -> prepare("SELECT courses.course_id, title, credits, exams.name, open_time, close_time,
-               (SELECT sum(points) FROM questions WHERE questions.exam_id = exams.exam_id ) AS total_points
-        FROM
-            instructors
-            NATURAL JOIN
-            courses
-            JOIN
-            exams ON courses.course_id = exams.course_id
+    $statement = $dbh -> prepare("SELECT 
+    courses.course_id, 
+    title, 
+    credits, 
+    exams.name, 
+    open_time,
+    close_time,
+    (SELECT sum(points) FROM questions WHERE questions.exam_id = exams.exam_id ) AS total_points
+        FROM instructors
+        NATURAL JOIN courses
+        JOIN exams 
+        ON courses.course_id = exams.course_id
         WHERE instructor_id = :id; ");
 
     $id = getInstructorId($username);

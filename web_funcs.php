@@ -6,6 +6,10 @@ if (!isset($_SESSION['username']) && $_SERVER["REQUEST_URI"] != "/cs3425/cr4zy_s
     die();
 }
 
+/**
+ * Prints table with te given data and headers
+ * Data and headers must be the same length
+ */
 function createTable( array $result, array $headers) {
     // if (count($result[0])/2 != count($headers)){
     //     echo print_r($result);

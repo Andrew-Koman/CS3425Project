@@ -109,13 +109,6 @@ function printResults($exam_id, $student_id){
     createTable($question_results, $headers);
 }
 
-
-// Gets all info from the takes_exam table
-// function getStudentExams(int $exam_id){
-
-// }
-
-
 function examExists(string $exam, string $course): bool
 {
     $dbh = connectDB();
