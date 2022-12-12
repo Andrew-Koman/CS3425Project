@@ -27,8 +27,9 @@
     echo "<p>Welcome $name!</p>"; 
 ?>
 
-<form method="post" action="../login.php">
-        <input type="submit" value="Logout" name="logout">
+<form method="post">
+    <button type="submit" name="logout" formaction="../login.php">Logout</button>
+    <button type="submit" name="pwchange" formaction="../changePassword.php">Change Password</button>
 </form>
 
 <h1>Enrolled Courses</h1>

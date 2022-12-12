@@ -16,8 +16,6 @@ echo "<p>Session:</p>";
 print_r($_SESSION);
 echo "</pre>";
 
-
-
 if( !isset($_POST["check_score"]) ) {
     header("Location: main.php");
     die();
