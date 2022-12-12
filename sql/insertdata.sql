@@ -35,8 +35,18 @@ LOAD DATA LOCAL INFILE './sample_data/exams.csv' INTO TABLE exams FIELDS TERMINA
 LOAD DATA LOCAL INFILE './sample_data/questions.csv' INTO TABLE questions FIELDS TERMINATED BY ',' ENCLOSED BY '"' IGNORE 1 LINES;
 LOAD DATA LOCAL INFILE './sample_data/answers.csv' INTO TABLE answers FIELDS TERMINATED BY ',' IGNORE 1 LINES;
 LOAD DATA LOCAL INFILE './sample_data/takes_exam.csv' INTO TABLE takes_exam FIELDS TERMINATED BY ',' IGNORE 1 LINES;
-LOAD DATA LOCAL INFILE './sample_data/student_answers.csv' INTO TABLE student_answers FIELDS TERMINATED BY ',' IGNORE 1 LINES (student_id, answer_id) SET earned_points = NULL;
+
+-- This triggers the autograder while the load doesn't
+INSERT INTO student_answers VALUES (2,2);
+INSERT INTO student_answers VALUES (2,6);
+INSERT INTO student_answers VALUES (2,8);
+INSERT INTO student_answers VALUES (2,9);
+INSERT INTO student_answers VALUES (2,13);
+INSERT INTO student_answers VALUES (2,17);
+INSERT INTO student_answers VALUES (2,18);
+
 LOAD DATA LOCAL INFILE './sample_data/takes_course.csv' INTO TABLE takes_course FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
 
 # Show data in all tables
 SELECT * FROM answers;
