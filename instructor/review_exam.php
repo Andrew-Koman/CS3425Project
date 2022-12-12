@@ -20,7 +20,7 @@ if (!examExists($_POST["exam"], $_POST["course"])){
 else {
     echo "<h1>Here are the questions for exam " . $_POST["exam"] . "</h1>";
 
-    $exam_id = getExamId($_POST["exam"]);
+    $exam_id = getExamId($_POST["exam"], $_POST["course"]);
     $questions = getQuestions($exam_id);
 
     echo "<div>";

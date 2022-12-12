@@ -5,10 +5,11 @@
 
 require "db.php";
 
-function getExamId(string $exam_name) : int {
+function getExamId(string $exam_name, int $course_id) : int {
     $dbh = connectDB();
-    $statement = $dbh -> prepare("SELECT exam_id FROM exams WHERE name = :name");
+    $statement = $dbh -> prepare("SELECT exam_id FROM exams WHERE name = :name AND course_id = :course_id");
     $statement -> bindParam(":name", $exam_name);
+    $statement -> bindParam(":course_id", $course_id);
     $statement -> execute();
     return ($statement -> fetch())[0];
 }
@@ -55,7 +56,7 @@ function examExists(string $exam, string $course): bool
 {
     $dbh = connectDB();
 
-    $statement = $dbh -> prepare("SELECT * FROM exams e JOIN courses c on e.course_id = c.course_id WHERE name = :exam AND title = :course");
+    $statement = $dbh -> prepare("SELECT * FROM exams e JOIN courses c on e.course_id = c.course_id WHERE name = :exam AND c.course_id = :course");
     $statement -> bindParam(":exam", $exam);
     $statement -> bindParam(":course", $course);
     $statement -> execute();

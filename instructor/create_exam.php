@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="../style.css">
+</head>
 <html lang="en">
 <p>This function is not implemented yet</p>
 <form action="main.php">
