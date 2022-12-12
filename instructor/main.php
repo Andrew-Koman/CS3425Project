@@ -23,7 +23,7 @@ echo '<p> Welcome ' . getName($_SESSION["username"]) . '!</p>';
 ?>
 <form method="post">
     <button type="submit" name="logout" formaction="../login.php">Logout</button>
-    <button type="submit" name="pwchange" formaction="../changePassword.php">Change Password</button>
+    <button type="submit" name="changePassword" formaction="../changePassword.php">Change Password</button>
 </form>
 
 <h1>Current Courses:</h1>
