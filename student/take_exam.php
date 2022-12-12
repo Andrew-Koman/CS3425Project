@@ -31,11 +31,13 @@ switch (examIsOpen($_SESSION["exam"], $_SESSION["course"])){
     case 1 :
         echo "<p style='color: red'>Exam is not open yet</p>";
         echo "<p>Exam " . $_POST['exam'] . " opens at " . getExamOpen($_POST["exam"], $_POST["course"]) . "</p>";
-        break;
+        echo "<form action='main.php'><button type='submit'>Go Back</button></form>";
+        die();
     case 2 :
         echo "<p style='color: red'>The exam is already closed</p>";
         echo "<p>Exam " . $_POST['exam'] . " closed at " . getExamClose($_POST["exam"], $_POST["course"]) . "</p>";
-        break;
+        echo "<form action='main.php'><button type='submit'>Go Back</button></form>";
+        die();
     case 0 :
     default:
         break;
