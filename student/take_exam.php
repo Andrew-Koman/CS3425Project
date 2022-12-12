@@ -15,12 +15,12 @@ if( !isset($_POST["take_exam"]) && !isset($_POST["submit"])) {
 }
 
 
-echo "<pre>";
-echo "<p>Post:</p>";
-print_r($_POST);
-echo "<p>Session:</p>";
-print_r($_SESSION);
-echo "</pre>";
+// echo "<pre>";
+// echo "<p>Post:</p>";
+// print_r($_POST);
+// echo "<p>Session:</p>";
+// print_r($_SESSION);
+// echo "</pre>";
 
 $student_id = getStudentId($_POST["username"]);
 
@@ -29,7 +29,7 @@ if (!examExists($_POST["exam"], $_POST["course"])){
 } else if (!isset($_POST["submit"])){
     $exam_id = getExamId($_POST["exam"], $_POST["course"]);
     startExam($student_id, $exam_id);
-    
+
     $questions = getQuestions($exam_id);
     echo "<form method='post' action='take_exam.php'>";
 

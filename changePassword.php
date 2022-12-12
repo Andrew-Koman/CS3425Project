@@ -31,10 +31,10 @@ session_start();
 require "db.php";
 
 
-echo "<pre>";
-print_r($_POST);
-print_r($_SESSION);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// print_r($_SESSION);
+// echo "</pre>";
 
 if( isset($_POST["pwchange"]) && isset($_SESSION["username"])) {
     if( $_POST["password1"] == $_POST["password2"]){

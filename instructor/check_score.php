@@ -9,12 +9,12 @@
 session_start();
 require "../exam.php";
 
-echo "<pre>";
-echo "<p>Post:</p>";
-print_r($_POST);
-echo "<p>Session:</p>";
-print_r($_SESSION);
-echo "</pre>";
+// echo "<pre>";
+// echo "<p>Post:</p>";
+// print_r($_POST);
+// echo "<p>Session:</p>";
+// print_r($_SESSION);
+// echo "</pre>";
 
 if( !isset($_POST["check_score"]) ) {
     header("Location: main.php");
