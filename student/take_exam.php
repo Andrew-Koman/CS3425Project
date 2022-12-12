@@ -9,9 +9,21 @@
 session_start();
 include "../exam.php";
 
-if( !isset($_POST["take_exam"]) && !isset($_POST["submit"])) {
+if (!isset($_POST["take_exam"]) && !isset($_POST["submit"]) || isset($_POST["exam"]) && examComplete($_POST["exam"], $_SESSION["username"], $_POST["course"])) {
     header("Location: main.php");
     die();
+}
+
+
+if (!isset($_SESSION["exam"]) && !isset($_SESSION["course"])) {
+    if( isset($_POST["exam"]) && isset($_POST["course"])) {
+        $_SESSION["exam"] = $_POST["exam"];
+        $_SESSION["course"] = $_POST["course"];
+    }
+    else {
+        header("Location: main.php");
+        die();
+    }
 }
 
 
@@ -21,13 +33,12 @@ if( !isset($_POST["take_exam"]) && !isset($_POST["submit"])) {
 // echo "<p>Session:</p>";
 // print_r($_SESSION);
 // echo "</pre>";
+$student_id = getStudentId($_SESSION["username"]);
 
-$student_id = getStudentId($_POST["username"]);
-
-if (!examExists($_POST["exam"], $_POST["course"])){
+if ( isset($_SESSION["exam"]) && $_SESSION["exam"] != "" && !examExists($_SESSION["exam"], $_SESSION["course"])){
     echo "<p style='color: red'>Error. Could not find exam</p>";
 } else if (!isset($_POST["submit"])){
-    $exam_id = getExamId($_POST["exam"], $_POST["course"]);
+    $exam_id = getExamId($_SESSION["exam"], $_SESSION["course"]);
     startExam($student_id, $exam_id);
 
     $questions = getQuestions($exam_id);
@@ -49,8 +60,13 @@ if (!examExists($_POST["exam"], $_POST["course"])){
     echo "<input type='submit' name='submit'>";
     echo "</form>";
 } else {
-    completeExam($student_id, getExamId($_POST["exam"], $_POST["course"]));
+    completeExam($student_id, getExamId($_SESSION["exam"], $_SESSION["course"]));
+    echo "<p>Congratulations. You completed exam " . $_SESSION["exam"] .  "</p>";
     echo "<form action='main.php'><button type='submit'>Go Back</button></form>";
+    unset($_SESSION["exam"]);
+    unset($_SESSION["course"]);
+    $_SESSION["exam_complete"] = TRUE;
+    die();
 }
 
 

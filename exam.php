@@ -81,6 +81,14 @@ function getAnswerId(string $answer_letter, int $question_id) : int{
     return ($statement->fetch())[0];
 }
 
+function getExamName(int $exam_id) : string {
+    $dbh = connectDB();
+    $statement = $dbh -> prepare("SELECT name FROM exams WHERE exam_id = :exam");
+    $statement->bindParam(":exam", $exam_id);
+    $statement->execute();
+    return ($statement->fetch())[0];
+}
+
 // prints the results tables
 function printResults($exam_id, $student_id){
     $dbh = connectDB();
@@ -102,6 +110,11 @@ function printResults($exam_id, $student_id){
     $question_results = $statement->fetchAll();
 
     $dbh->commit();
+    if (count($question_results) == 0) {
+        echo "<p>Sorry. You have yet to take exam " . getExamName($exam_id) . "</p>";
+        echo "<form method='post' action='student/main.php'><input type='submit' value='Go Back' name='go_main'></form>";
+        die();
+    }
     $headers = array("score", "start_time", "end_time", "durraction_in_sec");
     createTable($stats_results, $headers);
     echo "<br>";
@@ -109,16 +122,41 @@ function printResults($exam_id, $student_id){
     createTable($question_results, $headers);
 }
 
+
+// Gets all info from the takes_exam table
+// function getStudentExams(int $exam_id){
+
+// }
+
+function examComplete(string $exam_name, string $username, int $course) : bool {
+    $exam_id = getExamId($exam_name, $course);
+    $student_id = getStudentId($username);
+    $dbh = connectDB();
+    $statement = $dbh->prepare("SELECT end_time FROM takes_exam WHERE exam_id = :exam AND student_id = :student");
+    $statement->bindParam(":exam", $exam_id);
+    $statement->bindParam(":student", $student_id);
+    $statement->execute();
+    return count($statement -> fetchAll()) != 0;
+}
+
 function examExists(string $exam, string $course): bool
 {
-    $dbh = connectDB();
+    try {
+        $dbh = connectDB();
 
-    $statement = $dbh -> prepare("SELECT * FROM exams e JOIN courses c on e.course_id = c.course_id WHERE name = :exam AND c.course_id = :course");
-    $statement -> bindParam(":exam", $exam);
-    $statement -> bindParam(":course", $course);
-    $statement -> execute();
+        $statement = $dbh->prepare("SELECT * FROM exams e JOIN courses c on e.course_id = c.course_id WHERE name = :exam AND c.course_id = :course");
+        $statement->bindParam(":exam", $exam);
+        $statement->bindParam(":course", $course);
+        $statement->execute();
 
-    return count($statement -> fetchAll()) != 0;
+        return count($statement->fetchAll()) != 0;
+    }
+    catch (PDOException $exception) {
+        echo "<pre style='color: red'>";
+        print_r($exception);
+        echo "</pre>";
+    }
+    return FALSE;
 }
 
 ?>
