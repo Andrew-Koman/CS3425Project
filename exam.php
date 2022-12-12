@@ -140,7 +140,7 @@ function getExamOpen(string $exam, int $course_id) {
         $statement->execute();
         $x = $statement->fetch();
 
-        return strtotime($x[0]);
+        return $x[0];
     } catch (PDOException $e) {
         print "Error!" . $e->getMessage() . "<br/>";
         die();
@@ -157,7 +157,7 @@ function getExamClose(string $exam, int $course_id) {
         $statement->execute();
         $x = $statement->fetch();
 
-        return strtotime($x[0]);
+        return $x[0];
     } catch (PDOException $e) {
         print "Error!" . $e->getMessage() . "<br/>";
         die();
