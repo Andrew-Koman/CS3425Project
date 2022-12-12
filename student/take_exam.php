@@ -15,6 +15,10 @@ if (!isset($_POST["take_exam"]) && !isset($_POST["submit"]) ||
     die();
 }
 
+if ( isset($_POST["exam"]) && $_POST["exam"] != "" && !examExists($_POST["exam"], $_POST["course"])){
+    echo "<p style='color: red'>Error. Could not find exam</p>";
+    echo "<form action='main.php'><button type='submit'>Go Back</button></form>";
+}
 
 if (!isset($_SESSION["exam"]) && !isset($_SESSION["course"])) {
     if( isset($_POST["exam"]) && isset($_POST["course"])) {
@@ -44,10 +48,7 @@ switch (examIsOpen($_SESSION["exam"], $_SESSION["course"])){
 }
 
 $student_id = getStudentId($_SESSION["username"]);
-
-if ( isset($_SESSION["exam"]) && $_SESSION["exam"] != "" && !examExists($_SESSION["exam"], $_SESSION["course"])){
-    echo "<p style='color: red'>Error. Could not find exam</p>";
-} else if (!isset($_POST["submit"])){
+if (!isset($_POST["submit"])){
     $exam_id = getExamId($_SESSION["exam"], $_SESSION["course"]);
     startExam($student_id, $exam_id);
 

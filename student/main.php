@@ -16,6 +16,13 @@
         return;
     }
 
+    if (isset($_SESSION["exam"])){
+        unset($_SESSION["exam"]);
+    }
+    if (isset($_SESSION["course"])){
+        unset($_SESSION["course"]);
+    }
+
     $username = $_SESSION['username'];
     $name = getName($username);
     $student_id = getStudentId(($username));

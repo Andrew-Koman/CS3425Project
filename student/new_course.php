@@ -9,11 +9,6 @@
 session_start();
 include "../db.php";
 
-echo "<pre>";
-print_r($_POST);
-print_r($_SESSION);
-echo "</pre>";
-
 if (!isset($_POST['new_course'])){
     header("Location: main.php");
     return;
