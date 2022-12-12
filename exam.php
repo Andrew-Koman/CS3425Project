@@ -5,9 +5,6 @@
 
 require "db.php";
 
-if (!is_logged_on()) {
-    header("Location: ../login.php");
-}
 
 function getQuestions(int $exam_id):array{
     return [];

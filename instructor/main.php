@@ -10,8 +10,8 @@ echo "</pre>";
 
 require "../db.php";
 
-if (!isset($_SESSION["username"]) || $_SESSION["user_type"] != "instructors") {
-    header("Location: ./login.php");
+if ($_SESSION["user_type"] != "instructors") {
+    header("Location: ../login.php");
     return;
 }
 echo '<p> Welcome ' . getName($_SESSION["username"]) . '!</p>';

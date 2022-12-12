@@ -3,9 +3,6 @@ include "db.php";
 
 session_start();
 
-if (!is_logged_on() ){
-    header("Location: ../login.php");
-}
 
 if (!isset($_POST['check_score']) || !isset($_POST['exam'])){
     header("Location: main.php");
