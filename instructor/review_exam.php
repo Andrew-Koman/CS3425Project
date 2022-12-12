@@ -3,7 +3,10 @@ include "../db.php";
 include "../exam.php";
 
 session_start();
-is_logged_on();
+
+if (!is_logged_on()) {
+    header("Location: ../login.php");
+}
 
 
 ?>

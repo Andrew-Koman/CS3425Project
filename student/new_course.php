@@ -2,7 +2,11 @@
 include "../db.php";
 
 session_start();
-is_logged_on();
+
+
+if (~is_logged_on()){
+    header("Location: ../login.php");
+}
 
 if (!isset($_POST['new_course'])){
     header("Location: main.php");

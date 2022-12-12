@@ -5,7 +5,7 @@ function connectDB(): PDO
 {
     $config = parse_ini_file("db.ini");
     $dbh = new PDO($config['dsn'], $config['username'], $config['password']);
-    $dbh -> setAttribute(PDo::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $dbh -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;
 }
 
@@ -116,7 +116,7 @@ function getCourseTitle(int $course_id):string{
     $statement -> bindParam(":course_id", $course_id);
     $statement -> execute();
     $val = $statement -> fetch();
-    if ($val){
+    if (!$val){
         return FALSE; 
     } else {
         return $val[0];

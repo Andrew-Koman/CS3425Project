@@ -1,13 +1,12 @@
 <?php
 function is_logged_on(){
-    // Checks if the username is set, then returns to log in if it isn't
-    if(!isset($_SESSION['username'])){
-        header("Location: login.php");
-    }
+    // Returns the log in state
+    return !isset($_SESSION['username']);
 }
 
 function createTable( array $result, array $headers) {
-    if (count($result[0])/2 != count($headers)){
+    if (count($result) == 0 || count($result[0])/2 != count($headers)){
+        echo "<p style='color: red'>Error. Cannot display table</p>";
         return;
     }
 
