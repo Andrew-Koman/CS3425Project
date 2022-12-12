@@ -23,16 +23,15 @@
         </div>
         <br>
         <input type="submit" name="pwchange" style="padding: 5px; width: 100%">
-        <!--                    <p style="visibility: hidden; color: red">Incorrect username or password</p>-->
     </form>
 </div>
 </body>
 </html>
 
 <?php
+session_start();
 require "db.php";
 
-session_start();
 
 echo "<pre>";
 print_r($_POST);

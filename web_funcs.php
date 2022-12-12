@@ -37,7 +37,8 @@ function createTable( array $result, array $headers) {
             echo "</tr>";
         }   
     }
-    echo "</table>"; 
+    echo "</table>";
+    return true;
 }
 
 ?>

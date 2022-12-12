@@ -1,9 +1,6 @@
 <?php
-    session_start();
-    include "../db.php";
-
-
-
+session_start();
+include "../db.php";
 
 
 if (!isset($_POST['new_course'])){
