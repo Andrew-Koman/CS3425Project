@@ -46,9 +46,9 @@ function completeExam(int $student_id, int $exam_id){
 
 
 // Gets all info from the takes_exam table
-function getStudentExams(int $exam_id){
+// function getStudentExams(int $exam_id){
 
-}
+// }
 
 
 function examExists(string $exam, string $course): bool
