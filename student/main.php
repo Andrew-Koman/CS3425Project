@@ -1,6 +1,6 @@
 <?php
-    include "../db.php";
     session_start();
+    include "../db.php";
 
     // If the user is not a student, exit the session and return to log in
     if( $_SESSION['user_type'] != 'students'){

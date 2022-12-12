@@ -28,9 +28,9 @@
     </body>
 </html>
 <?php
+session_start();
 require "db.php";
 
-session_start();
 
 if( isset($_POST["logout"])) {
     session_destroy();

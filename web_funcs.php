@@ -2,7 +2,8 @@
 
 // If user is not logged in and the current page is not login page, then redirect to the login page
 if (!isset($_SESSION['username']) && $_SERVER["REQUEST_URI"] != "/cs3425/cr4zy_smrt/login.php") {
-    header("Location: ./login.php");
+    header("Location: https://classdb.it.mtu.edu/cs3425/cr4zy_smrt/login.php");
+    die();
 }
 
 function createTable( array $result, array $headers) {

@@ -1,7 +1,7 @@
 <?php
-include "../db.php";
+    session_start();
+    include "../db.php";
 
-session_start();
 
 
 

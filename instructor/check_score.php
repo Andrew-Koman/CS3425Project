@@ -1,9 +1,9 @@
 <style><?php include '../style.css'; ?></style>
 <?php
-
+session_start();
 require "../db.php";
 
-session_start();
+
 
 echo "<pre>";
 echo "<p>Post:</p>";
@@ -18,6 +18,7 @@ if( !isset($_POST["check_score"]) ) {
     header("Location: main.php");
     return;
 }
+
 getExamInfo($_POST["exam"], $_POST["course"]);
 
 function getExamInfo($exam, $course) {
