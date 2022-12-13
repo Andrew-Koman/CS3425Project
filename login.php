@@ -45,13 +45,6 @@ if( isset($_SESSION["user_type"])){
     }
 }
 
-// echo "<pre>";
-// echo "<p>instructor: U estark, P w1nter</p>";
-// echo "<p>student: U jsnow, P TheWall</p>";
-// print_r($_POST);
-// print_r($_SESSION);
-// echo "</pre>";
-
 if( isset($_POST["login"])) {
     $auth = authenticate($_POST["username"], $_POST["password"]);
     if ( $auth > 0) {

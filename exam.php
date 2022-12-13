@@ -100,34 +100,31 @@ function printExamResults($exam_id, $student_id){
     $statement->execute();
     $stats_results = $statement->fetchAll();
 
-$statement = $dbh -> prepare('SELECT
-   question_id,
-   description,
-   answer,
-   (SELECT answer FROM questions NATURAL JOIN answers WHERE q.question_id = question_id AND is_correct = 1 LIMIT 1),
-   (answers.is_correct * q.points) as your_points
-FROM questions q
-NATURAL JOIN answers
-NATURAL JOIN student_answers
-NATURAL RIGHT JOIN exams
-WHERE student_id = :student_id
-AND exams.exam_id = :exam_id');
-$statement -> bindParam(":student_id", $student_id);
-$statement -> bindParam(":exam_id", $exam_id);
-$statement->execute();
-$question_results = $statement->fetchAll();
+    $statement = $dbh -> prepare('SELECT question_id, description, answer,
+       (SELECT answer FROM questions NATURAL JOIN answers WHERE q.question_id = question_id AND is_correct = 1 LIMIT 1),
+       (answers.is_correct * q.points) as your_points
+    FROM questions q
+    NATURAL JOIN answers
+    NATURAL JOIN student_answers
+    NATURAL RIGHT JOIN exams
+    WHERE student_id = :student_id
+    AND exams.exam_id = :exam_id');
+    $statement -> bindParam(":student_id", $student_id);
+    $statement -> bindParam(":exam_id", $exam_id);
+    $statement->execute();
+    $question_results = $statement->fetchAll();
 
-$dbh->commit();
-if (count($question_results) == 0) {
-    echo "<p>Sorry. You have yet to take exam " . getExamName($exam_id) . "</p>";
-    echo "<form method='post' action='student/main.php'><input type='submit' value='Go Back' name='go_main'></form>";
-    die();
-}
-$headers = array("score", "start_time", "end_time", "durraction_in_sec");
-createTable($stats_results, $headers);
-echo "<br>";
-$headers = array("q_id", "description", "answer", "correct_answer", "points_earned");
-createTable($question_results, $headers);
+    $dbh->commit();
+    if (count($question_results) == 0) {
+        echo "<p>Sorry. You have yet to take exam " . getExamName($exam_id) . "</p>";
+        echo "<form method='post' action='student/main.php'><input type='submit' value='Go Back' name='go_main'></form>";
+        die();
+    }
+    $headers = array("score", "start_time", "end_time", "durraction_in_sec");
+    createTable($stats_results, $headers);
+    echo "<br>";
+    $headers = array("q_id", "description", "answer", "correct_answer", "points_earned");
+    createTable($question_results, $headers);
 }
 
 function getExamOpen(string $exam, int $course_id) {
@@ -178,9 +175,9 @@ function examIsOpen(string $exam, int $course_id) : int {
         $end_time = strtotime($x[1]);
         $now = strtotime(date('Y-m-d H:i:s'));
 
-        if ($now > $end_time) {
+        if ($now > $end_time) { // Exam is closed
             return 2;
-        } else if ($now < $start_time) {
+        } else if ($now < $start_time) { // Exam is not opened yet
             return 1;
         } else {
             return 0;
@@ -201,7 +198,6 @@ function examComplete(string $exam_name, string $username, int $course) : bool {
     $statement->execute();
     return count($statement -> fetchAll()) != 0;
 }
-
 function examExists(string $exam, string $course): bool
 {
     try {
@@ -220,6 +216,47 @@ function examExists(string $exam, string $course): bool
         echo "</pre>";
     }
     return FALSE;
+}
+
+// Get exam information for instructor view
+function getExamInfo() {
+    $dbh = connectDB();
+    $dbh -> beginTransaction();
+    $statement = $dbh -> prepare("SELECT course_id, total, title, completed, min, max, avg FROM (
+            ( SELECT c.course_id, c.title FROM exams e JOIN courses c on e.course_id = c.course_id JOIN instructors i on c.instructor_id = i.instructor_id WHERE i.username = :username AND e.name = :exam AND c.course_id = :course) a
+            JOIN
+            ( SELECT count(*) completed, min(score) min, max(score) max, avg(score) avg FROM takes_course NATURAL JOIN courses NATURAL JOIN takes_exam WHERE course_id = :course AND score != 0) b
+            JOIN
+            (SELECT count(*) total FROM takes_course t NATURAL JOIN courses c WHERE course_id = :course) c
+        )");
+
+
+    $statement -> bindParam(":exam", $_POST["exam"]);
+    $statement -> bindParam(":course", $_POST["course"]);
+    $statement -> bindParam(":username", $_SESSION["username"]);
+    $statement -> execute();
+    $dbh -> commit();
+    $result = $statement -> fetchAll();
+
+    $headers = array("c_id", "total", "exam_name", "Completed", "Minimum", "Maximum", "Average");
+    createTable($result, $headers);
+    $dbh = null;
+}
+
+// Get exam submissions for instructor view
+function getSubmissions(){
+    $dbh = connectDB();
+    $dbh -> beginTransaction();
+    $statement = $dbh -> prepare("SELECT s.student_id, s.name, start_time, end_time, score FROM takes_exam te JOIN students s ON te.student_id = s.student_id JOIN exams e ON te.exam_id = e.exam_id JOIN courses c on e.course_id = c.course_id WHERE e.name = :exam AND c.course_id = :course");
+    $statement -> bindParam(":exam", $_POST["exam"]);
+    $statement -> bindParam(":course", $_POST["course"]);
+    $statement -> execute();
+    $result = $statement -> fetchAll();
+
+
+    $headers = array("id", "name", "start_time", "end_time", "score");
+    createTable($result, $headers);
+    $dbh = null;
 }
 
 ?>

@@ -17,6 +17,7 @@ if (!examExists($_POST["exam"], $_POST["course"])){
     echo "<p style='color: red'>Error. Could not find exam</p>";
 }
 else {
+    echo "<h1>Exam results for " . $_POST["exam"] . "</h1>";
     getExamInfo();
     echo "<br>";
     getSubmissions();
