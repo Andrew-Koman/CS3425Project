@@ -223,7 +223,7 @@ function getExamInfo() {
     $dbh -> beginTransaction();
     $statement = $dbh -> prepare("SELECT 
         course_id, 
-        (SELECT COUNT(student_id) FROM takes_course), 
+        (SELECT COUNT(student_id) FROM takes_course WHERE course_id = :course_id), 
         exams.name, 
         COUNT(student_id), 
         MIN(score), 
