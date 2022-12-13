@@ -37,13 +37,13 @@ LOAD DATA LOCAL INFILE './sample_data/answers.csv' INTO TABLE answers FIELDS TER
 LOAD DATA LOCAL INFILE './sample_data/takes_exam.csv' INTO TABLE takes_exam FIELDS TERMINATED BY ',' IGNORE 1 LINES;
 
 -- This triggers the autograder while the load doesn't
-INSERT INTO student_answers VALUES (2,2);
-INSERT INTO student_answers VALUES (2,6);
-INSERT INTO student_answers VALUES (2,8);
-INSERT INTO student_answers VALUES (2,9);
-INSERT INTO student_answers VALUES (2,13);
-INSERT INTO student_answers VALUES (2,17);
-INSERT INTO student_answers VALUES (2,18);
+INSERT INTO student_answers VALUES (2,2, NULL);
+INSERT INTO student_answers VALUES (2,6, NULL);
+INSERT INTO student_answers VALUES (2,8, NULL);
+INSERT INTO student_answers VALUES (2,9, NULL);
+INSERT INTO student_answers VALUES (2,13, NULL);
+INSERT INTO student_answers VALUES (2,17, NULL);
+INSERT INTO student_answers VALUES (2,18, NULL);
 
 LOAD DATA LOCAL INFILE './sample_data/takes_course.csv' INTO TABLE takes_course FIELDS TERMINATED BY ',' IGNORE 1 LINES;
 
