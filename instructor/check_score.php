@@ -25,18 +25,25 @@ else {
 function getExamInfo() {
     $dbh = connectDB();
     $dbh -> beginTransaction();
-    $statement = $dbh -> prepare("SELECT course_id, total, title, completed, min, max, avg FROM (
-            ( SELECT c.course_id, c.title FROM exams e JOIN courses c on e.course_id = c.course_id JOIN instructors i on c.instructor_id = i.instructor_id WHERE i.username = :username AND e.name = :exam AND c.course_id = :course) a
-            JOIN
-            ( SELECT count(*) completed, min(score) min, max(score) max, avg(score) avg FROM takes_course NATURAL JOIN courses NATURAL JOIN takes_exam WHERE course_id = :course AND score != 0) b
-            JOIN
-            (SELECT count(*) total FROM takes_course t NATURAL JOIN courses c WHERE course_id = :course) c
+    $statement = $dbh -> prepare("SELECT 
+        course_id, 
+        (SELECT COUNT(student_id) FROM takes_course), 
+        exams.name, 
+        COUNT(student_id), 
+        MIN(score), 
+        MAX(score),
+        AVG(score)
+    FROM exams
+    NATURAL JOIN takes_exam
+    WHERE course_id = :course_id
+    AND exam_id = :exam_id
         )");
 
+    $course_id = intval($_POST["course"]);
+    $exam_id = getExamId($_POST["exam"], $course_id);
 
-    $statement -> bindParam(":exam", $_POST["exam"]);
-    $statement -> bindParam(":course", $_POST["course"]);
-    $statement -> bindParam(":username", $_SESSION["username"]);
+    $statement -> bindParam(":exam_id", $exam_id);
+    $statement -> bindParam(":course_id", $course_id);
     $statement -> execute();
     $dbh -> commit();
     $result = $statement -> fetchAll();
