@@ -21,7 +21,7 @@ echo '<p> Welcome ' . getName($_SESSION["username"]) . '!</p>';
     <button type="submit" name="changePassword" formaction="../changePassword.php">Change Password</button>
 </form>
 
-<h1>Current Courses:</h1>
+<h1>Current Courses and their Exams:</h1>
 <?php
     print_r(getCoursesInstructor($_SESSION["username"]));
 ?>
