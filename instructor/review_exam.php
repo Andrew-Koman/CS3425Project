@@ -24,9 +24,9 @@ else {
     $questions = getQuestions($exam_id);
 
     echo "<div>";
-
+    $index = 1;
     foreach ($questions as $question) {
-        echo "<p>Q" . $question["question_id"] . ": " . $question["description"] . " (" . $question["points"] . " points)</p>";
+        echo "<p>Q" . $index . ": " . $question["description"] . " (" . $question["points"] . " points)</p>";
 
         $choices = getChoices($question["question_id"]);
         echo "<div style='margin-left: 20px'>";
@@ -34,6 +34,7 @@ else {
             echo "<p>" . $choice["answer_letter"] . ": " . $choice["answer"] . " " . ($choice["is_correct"] ? "(Correct)" : "") . "</p>";
         }
         echo "</div>";
+        $index++;
     }
 
     echo "</div>";

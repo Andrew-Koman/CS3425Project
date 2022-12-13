@@ -12,7 +12,7 @@ DELETE FROM students WHERE TRUE;
 # Create Instructors
 CALL create_instructor('estark', 'Eddard Stark');
 CALL create_instructor('tlannister', 'Tywin Lannister');
-CALL create_instructor('starley', 'Robert Baratheon');
+CALL create_instructor('rbaratheon', 'Robert Baratheon');
 
 # Create Students
 CALL create_student('jsnow', 'John Snow');
