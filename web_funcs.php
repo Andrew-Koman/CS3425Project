@@ -7,11 +7,10 @@ if (!isset($_SESSION['username']) && $_SERVER["REQUEST_URI"] != "/cs3425/cr4zy_s
 }
 
 /**
- * Prints table with te given data and headers
+ * Prints table with the given data and headers
  * Data and headers must be the same length
  */
 function createTable( array $result, array $headers) {
-
     $num = count($result);
     echo "<table>";
     echo "<tr>";
@@ -32,7 +31,6 @@ function createTable( array $result, array $headers) {
         }   
     }
     echo "</table>";
-    return true;
 }
 
 ?>

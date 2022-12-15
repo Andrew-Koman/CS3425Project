@@ -120,7 +120,7 @@ function printExamResults($exam_id, $student_id){
         echo "<form method='post' action='student/main.php'><input type='submit' value='Go Back' name='go_main'></form>";
         die();
     }
-    $headers = array("score", "start_time", "end_time", "durraction_in_sec");
+    $headers = array("score", "start_time", "end_time", "duration_in_sec");
     createTable($stats_results, $headers);
     echo "<br>";
     $headers = array("q_id", "description", "answer", "correct_answer", "points_earned");
@@ -251,7 +251,9 @@ function getExamInfo() {
 function getSubmissions(){
     $dbh = connectDB();
     $dbh -> beginTransaction();
-    $statement = $dbh -> prepare("SELECT s.student_id, s.name, start_time, end_time, score FROM takes_exam te JOIN students s ON te.student_id = s.student_id JOIN exams e ON te.exam_id = e.exam_id JOIN courses c on e.course_id = c.course_id WHERE e.name = :exam AND c.course_id = :course");
+    $statement = $dbh -> prepare("SELECT s.student_id, s.name, start_time, end_time, score
+        FROM takes_exam te JOIN students s ON te.student_id = s.student_id JOIN exams e ON te.exam_id = e.exam_id JOIN courses c on e.course_id = c.course_id
+        WHERE e.name = :exam AND c.course_id = :course");
     $statement -> bindParam(":exam", $_POST["exam"]);
     $statement -> bindParam(":course", $_POST["course"]);
     $statement -> execute();
